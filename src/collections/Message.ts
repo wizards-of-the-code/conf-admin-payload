@@ -3,6 +3,7 @@ import { CollectionConfig } from 'payload/types';
 const Message: CollectionConfig = {
   slug: 'messages',
   admin: {
+    useAsTitle: 'name',
     group: 'Настройки',
   },
   fields: [
@@ -12,12 +13,23 @@ const Message: CollectionConfig = {
     },
     {
       label: 'Сообщения',
-      name: 'value',
+      name: 'messages',
       type: 'array',
       fields: [
         {
-          name: 'message',
-          type: 'text'
+          name: 'msg',
+          type: 'textarea',
+        },
+      ],
+    },
+    {
+      label: 'Картинки',
+      name: 'images',
+      type: 'array',
+      fields: [
+        {
+          name: 'url',
+          type: 'text',
         },
       ],
     },
