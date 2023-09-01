@@ -125,6 +125,14 @@ const Events: CollectionConfig = {
           type: 'text'
         },
       ],
+      admin: {
+        initCollapsed: false,
+        components: {
+          RowLabel: ({ data, index = 0 }) => {
+            return data ? `${new Date(data.date).toLocaleTimeString().slice(0, 5)} - ${data.title}` : 'undefined';
+          },
+        },
+      },
     },
     {
       name: 'participants',
