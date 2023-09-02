@@ -6,6 +6,7 @@ import Events from './collections/Events';
 import Participants from './collections/Participant';
 import Log from './collections/Log';
 import Message from './collections/Message';
+import Notifications from './collections/Notification';
 
 export default buildConfig({
   admin: {
@@ -16,6 +17,7 @@ export default buildConfig({
     Participants,
     Users,
     Message,
+    Notifications,
     Log
   ],
   typescript: {
