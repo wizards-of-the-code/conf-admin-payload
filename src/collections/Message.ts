@@ -6,6 +6,9 @@ const Message: CollectionConfig = {
     useAsTitle: 'name',
     group: 'Настройки',
   },
+  access: {
+    read: () => true,
+  },
   fields: [
     {
       name: 'name',
@@ -28,8 +31,9 @@ const Message: CollectionConfig = {
       type: 'array',
       fields: [
         {
-          name: 'url',
-          type: 'text',
+          name: "img_name",
+          type: "upload",
+          relationTo: "media",
         },
       ],
     },
