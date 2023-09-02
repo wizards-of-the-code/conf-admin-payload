@@ -48,6 +48,18 @@ const Notifications: CollectionConfig = {
       ],
     },
     {
+      label: 'Картинки',
+      name: 'photos',
+      type: 'array',
+      fields: [
+        {
+          name: "img_name",
+          type: "upload",
+          relationTo: "media",
+        },
+      ],
+    },
+    {
       label: 'Картинки сверху',
       name: 'photos_on_top',
       type: 'checkbox',
