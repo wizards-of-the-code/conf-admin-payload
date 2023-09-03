@@ -7,7 +7,7 @@ const Media: CollectionConfig = {
   },
   upload: {
     staticURL: '/media',
-    staticDir: 'media',
+    staticDir: '/var/payload-admin/media',
     imageSizes: [
       {
         name: 'thumbnail',
