@@ -4,11 +4,30 @@ services:
 
   payload:
     build: .
-    ports:
-      - "3002:3000"
+    # ports:
+    #   - "3002:3000"
+    expose:
+      - 3000
+    networks:
+      - payload_network
     volumes:
       - /var/payload-admin/media:/var/payload-admin/media
     working_dir: /home/node/app/
     command: node ./dist/server.js
     env_file:
       - .env
+
+  nginx:
+    build: ./nginx
+    networks:
+      - payload_network
+    volumes:
+      - /var/payload-admin/media:/var/payload-admin/media
+    ports:
+      - "80:80"
+    depends_on:
+      - payload
+
+networks:
+  payload_network:
+    driver: bridge 

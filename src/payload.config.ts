@@ -13,6 +13,9 @@ export default buildConfig({
   admin: {
     user: Users.slug,
   },
+  upload: {
+    staticDir: 'public/uploads',
+  },
   collections: [
     Events,
     Participants,
