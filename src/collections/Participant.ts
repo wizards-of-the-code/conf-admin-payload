@@ -1,4 +1,8 @@
-import { CollectionConfig } from 'payload/types';
+import { CollectionConfig, FieldHook } from 'payload/types';
+
+const getUsername: FieldHook = async ({ data }) => {
+  return `@${data.tg.username}`;
+};
 
 const Participants: CollectionConfig = {
   slug: 'participants',
@@ -8,10 +12,17 @@ const Participants: CollectionConfig = {
   },
   admin: {
     group: 'Конференции',
+    useAsTitle: 'username',
+    defaultColumns: [
+      'username',
+      'tg',
+      'events',
+    ],
   },
   fields: [
     {
       name: 'tg',
+      label: 'Пользователь',
       type: 'group',
       interfaceName: "Telegram",
       fields: [
@@ -19,10 +30,6 @@ const Participants: CollectionConfig = {
           name: 'tg_id',
           type: 'number',
           required: true,
-          custom: {
-            name: 'tg_id',
-            value: ({ data }) => data?.tg_id || 'Untitled',
-          }
         },
         {
           name: 'username',
@@ -36,7 +43,7 @@ const Participants: CollectionConfig = {
           name: 'last_name',
           type: 'text',
         },
-      ]
+      ],
     },
     {
       name: 'events',
@@ -46,6 +53,24 @@ const Participants: CollectionConfig = {
       admin: {
         allowCreate: false,
       }
+    },
+    {
+      name: 'username',
+      label: 'Пользователь',
+      type: 'text',
+      access: {
+        create: () => false,
+        update: () => false,
+      },
+      hooks: {
+        beforeChange: [
+          ({ siblingData }) => {
+            // Ensures data is not stored in DB
+            delete siblingData['username'];
+          }
+        ],
+        afterRead: [getUsername],
+      },
     }
   ],
 };
