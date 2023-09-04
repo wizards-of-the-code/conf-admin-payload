@@ -2,6 +2,7 @@ import { CollectionConfig } from 'payload/types';
 
 const Media: CollectionConfig = {
   slug: 'media',
+  auth: false,
   admin: {
     group: 'Системные данные',
   },
