@@ -20,7 +20,7 @@ const Message: CollectionConfig = {
       type: 'array',
       fields: [
         {
-          name: 'msg',
+          name: 'text',
           type: 'textarea',
         },
       ],
@@ -31,7 +31,7 @@ const Message: CollectionConfig = {
       type: 'array',
       fields: [
         {
-          name: "img_name",
+          name: "media_id",
           type: "upload",
           relationTo: "media",
         },

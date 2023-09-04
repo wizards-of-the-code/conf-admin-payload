@@ -2,8 +2,22 @@ import { CollectionConfig } from 'payload/types';
 
 const Notifications: CollectionConfig = {
   slug: 'notifications',
+  labels: {
+    singular: 'Рассылка',
+    plural: 'Рассылки',
+  },
   admin: {
-    useAsTitle: 'email',
+    useAsTitle: 'title',
+    group: 'Конференции',
+    defaultColumns: [
+      'title',
+      'is_active',
+      'event_id',
+      'type',
+      'text',
+      'datetime_to_send',
+      'images',
+    ],
   },
   fields: [
     {
@@ -11,12 +25,19 @@ const Notifications: CollectionConfig = {
       type: 'checkbox',
     },
     {
+      name: 'title',
+      label: 'Название',
+      type: 'text',
+    },
+    {
       name: 'event_id',
+      label: 'Конференция',
       type: 'relationship',
       relationTo: 'events',
     },
     {
       name: 'type',
+      label: 'Тип',
       type: 'select',
       options: [
         {
@@ -31,10 +52,12 @@ const Notifications: CollectionConfig = {
     },
     {
       name: 'text',
+      label: 'Текст сообщения',
       type: 'textarea',
     },
     {
       name: 'links',
+      label: 'Ссылки',
       type: 'array',
       fields: [
         {
@@ -48,12 +71,12 @@ const Notifications: CollectionConfig = {
       ],
     },
     {
+      name: 'images',
       label: 'Картинки',
-      name: 'photos',
       type: 'array',
       fields: [
         {
-          name: "img_name",
+          name: "media_id",
           type: "upload",
           relationTo: "media",
         },
@@ -66,20 +89,25 @@ const Notifications: CollectionConfig = {
     },
     {
       name: 'sent',
+      label: 'Отправлено',
       type: 'date',
       admin: {
+        readOnly: true,
         date: {
           displayFormat: 'dd.MM.yyyy HH:mm',
+          timeFormat: 'HH:mm',
           pickerAppearance: 'dayAndTime',
         }
       }
     },
     {
       name: 'datetime_to_send',
+      label: 'Запланированная дата и время отправки',
       type: 'date',
       admin: {
         date: {
           displayFormat: 'dd.MM.yyyy HH:mm',
+          timeFormat: 'HH:mm',
           pickerAppearance: 'dayAndTime',
         }
       }

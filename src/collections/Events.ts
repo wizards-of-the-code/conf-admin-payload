@@ -17,6 +17,7 @@ const Events: CollectionConfig = {
       'datetime',
     ],
     group: 'Конференции',
+    useAsTitle: 'name',
   },
   fields: [
     {
