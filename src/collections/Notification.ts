@@ -1,4 +1,21 @@
-import { CollectionConfig } from 'payload/types';
+import { CollectionBeforeChangeHook, CollectionConfig } from 'payload/types';
+
+const addCreationData: CollectionBeforeChangeHook = async ({ 
+  data, 
+  req, 
+  operation, 
+  originalDoc, 
+}) => {
+  // add the generated simulation inside the data that will be saved to database
+  if(operation === 'create') {
+    data.sent = null;
+  }
+
+  console.log('operation', operation);
+
+  // return the data
+  return data;
+};
 
 const Notifications: CollectionConfig = {
   slug: 'notifications',
@@ -14,8 +31,8 @@ const Notifications: CollectionConfig = {
       'is_active',
       'event_id',
       'type',
-      'text',
       'datetime_to_send',
+      'sent',
       'images',
     ],
   },
@@ -23,6 +40,7 @@ const Notifications: CollectionConfig = {
     {
       name: 'is_active',
       type: 'checkbox',
+      defaultValue: false,
     },
     {
       name: 'title',
@@ -84,8 +102,9 @@ const Notifications: CollectionConfig = {
     },
     {
       label: 'Картинки сверху',
-      name: 'photos_on_top',
+      name: 'images_on_top',
       type: 'checkbox',
+      defaultValue: true,
     },
     {
       name: 'sent',
@@ -117,6 +136,11 @@ const Notifications: CollectionConfig = {
       type: 'number',
     },
   ],
+  hooks: {
+    beforeChange: [
+      addCreationData,
+    ],
+  },
 };
 
 export default Notifications;
