@@ -44,17 +44,20 @@ const Notifications: CollectionConfig = {
       name: 'title',
       label: 'Название',
       type: 'text',
+      required: true,
     },
     {
       name: 'event_id',
       label: 'Конференция',
       type: 'relationship',
       relationTo: 'events',
+      required: true,
     },
     {
       name: 'type',
       label: 'Тип',
       type: 'select',
+      required: true,
       options: [
         {
           label: 'Automatic',
@@ -70,6 +73,7 @@ const Notifications: CollectionConfig = {
       name: 'text',
       label: 'Текст сообщения',
       type: 'textarea',
+      required: true,
     },
     {
       name: 'links',

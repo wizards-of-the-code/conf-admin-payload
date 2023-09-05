@@ -34,6 +34,7 @@ const Participants: CollectionConfig = {
         {
           name: 'username',
           type: 'text',
+          required: true,
         },
         {
           name: 'first_name',
