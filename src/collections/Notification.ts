@@ -11,8 +11,6 @@ const addCreationData: CollectionBeforeChangeHook = async ({
     data.sent = null;
   }
 
-  console.log('operation', operation);
-
   // return the data
   return data;
 };
