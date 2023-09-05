@@ -1,11 +1,10 @@
 import { buildConfig } from 'payload/config';
 import path from 'path';
-import { payloadCloud } from '@payloadcms/plugin-cloud';
 import Users from './collections/Users';
 import Events from './collections/Events';
 import Participants from './collections/Participant';
-import Log from './collections/Log';
-import Message from './collections/Message';
+import Logs from './collections/Logs';
+import Messages from './collections/Messages';
 import Notifications from './collections/Notification';
 import Media from './collections/Media';
 import { relationshipsAsObjectID } from '@payloadcms/plugin-relationship-object-ids';
@@ -21,9 +20,9 @@ export default buildConfig({
     Events,
     Participants,
     Users,
-    Message,
+    Messages,
     Notifications,
-    Log,
+    Logs,
     Media
   ],
   typescript: {
@@ -33,7 +32,6 @@ export default buildConfig({
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
   plugins: [
-    payloadCloud(),
     relationshipsAsObjectID()
   ]
 });

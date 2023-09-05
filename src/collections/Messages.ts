@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload/types';
 
-const Message: CollectionConfig = {
+const Messages: CollectionConfig = {
   slug: 'messages',
   admin: {
     useAsTitle: 'name',
@@ -40,4 +40,4 @@ const Message: CollectionConfig = {
   ],
 };
 
-export default Message;
+export default Messages;

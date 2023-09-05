@@ -1,7 +1,7 @@
 import { CollectionConfig } from 'payload/types';
 
-const Log: CollectionConfig = {
-  slug: 'log',
+const Logs: CollectionConfig = {
+  slug: 'logs',
   admin: {
     group: 'Системные данные',
   },
@@ -46,4 +46,4 @@ const Log: CollectionConfig = {
   ],
 };
 
-export default Log;
+export default Logs;
