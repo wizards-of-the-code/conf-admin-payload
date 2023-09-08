@@ -3,7 +3,7 @@ import { CollectionConfig } from 'payload/types';
 const Events: CollectionConfig = {
   slug: 'events',
   labels: {
-    singular: 'Концеренция',
+    singular: 'Конференция',
     plural: 'Конференции',
   },
   admin: {
