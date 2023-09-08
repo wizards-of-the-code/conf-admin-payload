@@ -10,6 +10,11 @@ const Users: CollectionConfig = {
   fields: [
     // Email added by default
     // Add more fields as needed
+    {
+      name: 'tg_username',
+      label: 'Telegram Username',
+      type: 'text',
+    },
   ],
 };
 
