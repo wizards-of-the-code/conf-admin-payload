@@ -127,10 +127,48 @@ const Events: CollectionConfig = {
         },
       ],
       admin: {
-        initCollapsed: false,
+        initCollapsed: true,
         components: {
           RowLabel: ({ data, index = 0 }) => {
             return data ? `${new Date(data.date).toLocaleTimeString().slice(0, 5)} - ${data.title}` : 'undefined';
+          },
+        },
+      },
+    },
+    {
+      label: 'Спикеры',
+      name: 'speakers',
+      type: 'array',
+      fields: [
+        {
+          name: 'name',
+          label: 'Имя спикера',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'position',
+          label: 'Должность спикера',
+          type: 'text',
+        },
+        {
+          name: 'topic',
+          label: 'Тема доклада',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'topic_description',
+          label: 'Описание',
+          type: 'textarea',
+          required: true,
+        },
+      ],
+      admin: {
+        initCollapsed: true,
+        components: {
+          RowLabel: ({ data, index = 0 }) => {
+            return data ? `${data.name}: ${data.topic}` : 'undefined';
           },
         },
       },
