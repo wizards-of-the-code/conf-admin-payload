@@ -16,7 +16,7 @@ const Messages: CollectionConfig = {
     },
     {
       label: 'Сообщения',
-      name: 'messages',
+      name: 'messageList',
       type: 'array',
       fields: [
         {
