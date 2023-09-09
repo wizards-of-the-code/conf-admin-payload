@@ -53,6 +53,11 @@ const Events: CollectionConfig = {
       type: 'textarea'
     },
     {
+      name: 'link',
+      label: 'Ссылка на сайт мероприятия',
+      type: 'text'
+    },
+    {
       name: 'location',
       type: 'group',
       interfaceName: "Location",
@@ -62,30 +67,29 @@ const Events: CollectionConfig = {
           fields: [
             {
               name: 'country',
+              label: 'Страна',
               type: 'text',
             },
             {
               name: 'city',
+              label: 'Город',
               type: 'text',
             },
           ],
         },
         {
           name: 'address',
+          label: 'Адрес',
           type: 'text',
         },
       ]
-    },
-    {
-      name: 'link',
-      label: 'Ссылка на сайт мероприятия',
-      type: 'text'
     },
     {
       type: 'row',
       fields: [
         {
           name: 'current_price',
+          label: 'Цена билета',
           type: 'text',
           admin: {
             width: '40%',
@@ -93,6 +97,7 @@ const Events: CollectionConfig = {
         },
         {
           name: 'partner_price',
+          label: 'Цена билета за +1',
           type: 'text',
           admin: {
             width: '40%',
@@ -100,6 +105,7 @@ const Events: CollectionConfig = {
         },
         {
           name: 'currency',
+          label: 'Валюта',
           type: 'text',
           admin: {
             width: '20%',
@@ -119,6 +125,7 @@ const Events: CollectionConfig = {
       fields: [
         {
           name: 'date',
+          label: 'Время',
           type: 'date',
           admin: {
             date: {
@@ -129,6 +136,7 @@ const Events: CollectionConfig = {
         },
         {
           name: 'title',
+          label: 'Событие',
           type: 'text'
         },
       ],
@@ -191,6 +199,7 @@ const Events: CollectionConfig = {
       hasMany: true,
       admin: {
         allowCreate: false,
+        readOnly: true,
       }
     },
   ]
