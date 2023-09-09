@@ -15,6 +15,9 @@ export default buildConfig({
   },
   upload: {
     staticDir: 'public/uploads',
+    limits: {
+      fileSize: 5000000, // 5MB, written in bytes
+    },
   },
   collections: [
     Events,
