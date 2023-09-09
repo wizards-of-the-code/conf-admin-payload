@@ -78,6 +78,7 @@ const Events: CollectionConfig = {
     },
     {
       name: 'link',
+      label: 'Ссылка на сайт мероприятия',
       type: 'text'
     },
     {
@@ -105,6 +106,11 @@ const Events: CollectionConfig = {
           },
         },
       ],
+    },
+    {
+      name: 'tickets_link',
+      label: 'Ссылка на билеты',
+      type: 'text',
     },
     {
       label: 'Расписание',
@@ -172,6 +178,11 @@ const Events: CollectionConfig = {
           },
         },
       },
+    },
+    {
+      name: 'tg_channel',
+      label: 'Групповой чат в Telegram',
+      type: 'text',
     },
     {
       name: 'participants',
