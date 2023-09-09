@@ -1,4 +1,5 @@
 import { CollectionBeforeChangeHook, CollectionConfig } from 'payload/types';
+import CustomButtonComponent from '../components/custom-button/CustomButton';
 
 const addCreationData: CollectionBeforeChangeHook = async ({ 
   data, 
@@ -35,6 +36,16 @@ const Notifications: CollectionConfig = {
     ],
   },
   fields: [
+    {
+      name: "myCustomUIField", // required
+      type: "ui", // required
+      admin: {
+        position: 'sidebar',
+        components: {
+          Field: CustomButtonComponent,
+        },
+      },
+    },
     {
       name: 'is_active',
       type: 'checkbox',
