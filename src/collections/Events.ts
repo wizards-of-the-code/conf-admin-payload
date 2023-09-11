@@ -50,7 +50,18 @@ const Events: CollectionConfig = {
     {
       name: 'description',
       label: 'Описание',
-      type: 'textarea'
+      type: 'richText',
+      admin: {
+        elements: [
+          "link",
+        ],
+        leaves: [
+          "bold",
+          "italic",
+          'underline',
+          'strikethrough',
+        ],
+      },
     },
     {
       name: 'link',
