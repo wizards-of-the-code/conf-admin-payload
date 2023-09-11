@@ -21,7 +21,19 @@ const Messages: CollectionConfig = {
       fields: [
         {
           name: 'text',
-          type: 'textarea',
+          type: 'richText',
+          admin: {
+            elements: [
+              "link",
+            ],
+            leaves: [
+              "bold",
+              "italic",
+              'underline',
+              'strikethrough',
+            ],
+          },
+          required: true,
         },
       ],
     },
