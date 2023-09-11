@@ -130,7 +130,8 @@ const Events: CollectionConfig = {
           admin: {
             date: {
               displayFormat: 'HH:mm',
-              pickerAppearance: 'dayAndTime',
+              pickerAppearance: 'timeOnly',
+              timeFormat: 'HH:mm',
             }
           }
         },
