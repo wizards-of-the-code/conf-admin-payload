@@ -1,5 +1,15 @@
 import { CollectionConfig } from 'payload/types';
 
+async function dateValidate(pickedDate) {
+  const pickedDateMs = (new Date(pickedDate)).getTime(); 
+  const currentDateMs = (new Date()).getTime();
+
+  if (pickedDateMs > currentDateMs) {
+    return true;
+  }
+  return 'Неверная дата!';
+}
+
 const Events: CollectionConfig = {
   slug: 'events',
   labels: {
@@ -37,7 +47,8 @@ const Events: CollectionConfig = {
             date: {
               displayFormat: 'dd.MM.yyyy',
             }
-          }
+          },
+          validate: dateValidate,
         },
       ],
     },
@@ -54,6 +65,7 @@ const Events: CollectionConfig = {
     },
     {
       name: 'location',
+      label: 'Место проведения',
       type: 'group',
       interfaceName: "Location",
       fields: [
@@ -62,22 +74,28 @@ const Events: CollectionConfig = {
           fields: [
             {
               name: 'country',
+              label: 'Страна',
               type: 'text',
+              required: true,
             },
             {
               name: 'city',
+              label: 'Город',
               type: 'text',
+              required: true,
             },
           ],
         },
         {
           name: 'address',
+          label: 'Адрес',
           type: 'text',
         },
       ]
     },
     {
       name: 'link',
+      label: 'Ссылка',
       type: 'text'
     },
     {
@@ -85,6 +103,7 @@ const Events: CollectionConfig = {
       fields: [
         {
           name: 'current_price',
+          label: 'Стоимость',
           type: 'text',
           admin: {
             width: '40%',
@@ -92,6 +111,7 @@ const Events: CollectionConfig = {
         },
         {
           name: 'partner_price',
+          label: 'Стоимость для партнера',
           type: 'text',
           admin: {
             width: '40%',
@@ -99,6 +119,7 @@ const Events: CollectionConfig = {
         },
         {
           name: 'currency',
+          label: 'Валюта',
           type: 'text',
           admin: {
             width: '20%',
@@ -113,16 +134,19 @@ const Events: CollectionConfig = {
       fields: [
         {
           name: 'date',
+          label: 'Время',
           type: 'date',
           admin: {
             date: {
               displayFormat: 'HH:mm',
               pickerAppearance: 'dayAndTime',
             }
-          }
+          },
+          validate: dateValidate,
         },
         {
           name: 'title',
+          label: 'Название',
           type: 'text'
         },
       ],
@@ -175,6 +199,7 @@ const Events: CollectionConfig = {
     },
     {
       name: 'participants',
+      label: 'Участники',
       type: 'relationship',
       relationTo: 'participants',
       hasMany: true,
