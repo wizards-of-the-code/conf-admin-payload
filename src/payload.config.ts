@@ -8,6 +8,7 @@ import Messages from './collections/Messages';
 import Notifications from './collections/Notification';
 import Media from './collections/Media';
 import { relationshipsAsObjectID } from '@payloadcms/plugin-relationship-object-ids';
+import Currencies from './collections/Currencies';
 
 export default buildConfig({
   admin: {
@@ -23,6 +24,7 @@ export default buildConfig({
     Participants,
     Users,
     Messages,
+    Currencies,
     Notifications,
     Logs,
     Media
