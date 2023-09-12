@@ -50,7 +50,18 @@ const Events: CollectionConfig = {
     {
       name: 'description',
       label: 'Описание',
-      type: 'textarea'
+      type: 'richText',
+      admin: {
+        elements: [
+          "link",
+        ],
+        leaves: [
+          "bold",
+          "italic",
+          'underline',
+          'strikethrough',
+        ],
+      },
     },
     {
       name: 'link',
@@ -175,7 +186,18 @@ const Events: CollectionConfig = {
         {
           name: 'topic_description',
           label: 'Описание',
-          type: 'textarea',
+          type: 'richText',
+          admin: {
+            elements: [
+              "link",
+            ],
+            leaves: [
+              "bold",
+              "italic",
+              'underline',
+              'strikethrough',
+            ],
+          },
           required: true,
         },
       ],

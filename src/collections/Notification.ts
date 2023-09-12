@@ -72,7 +72,18 @@ const Notifications: CollectionConfig = {
     {
       name: 'text',
       label: 'Текст сообщения',
-      type: 'textarea',
+      type: 'richText',
+      admin: {
+        elements: [
+          "link",
+        ],
+        leaves: [
+          "bold",
+          "italic",
+          'underline',
+          'strikethrough',
+        ],
+      },
       required: true,
     },
     {
