@@ -49,6 +49,21 @@ const Messages: CollectionConfig = {
         },
       ],
     },
+    {
+      name: 'links',
+      label: 'Ссылки',
+      type: 'array',
+      fields: [
+        {
+          name: 'name',
+          type: 'text',
+        },
+        {
+          name: 'url',
+          type: 'text',
+        },
+      ],
+    },
   ],
 };
 
