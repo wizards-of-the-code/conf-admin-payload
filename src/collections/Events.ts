@@ -1,9 +1,10 @@
 import { CollectionConfig } from 'payload/types';
+import CurrencySelectField from '../fields/currencySelector/field'
 
 const Events: CollectionConfig = {
   slug: 'events',
   labels: {
-    singular: 'Концеренция',
+    singular: 'Конференция',
     plural: 'Конференции',
   },
   admin: {
@@ -103,7 +104,7 @@ const Events: CollectionConfig = {
           label: 'Цена билета',
           type: 'text',
           admin: {
-            width: '40%',
+            width: '30%',
           },
         },
         {
@@ -111,17 +112,10 @@ const Events: CollectionConfig = {
           label: 'Цена билета за +1',
           type: 'text',
           admin: {
-            width: '40%',
+            width: '30%',
           },
         },
-        {
-          name: 'currency',
-          label: 'Валюта',
-          type: 'text',
-          admin: {
-            width: '20%',
-          },
-        },
+        CurrencySelectField,
       ],
     },
     {

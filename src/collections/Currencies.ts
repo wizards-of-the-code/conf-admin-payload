@@ -4,28 +4,26 @@ const Currencies: CollectionConfig = {
   slug: 'currencies',
   labels: {
     singular: 'Валюта',
-    plural: 'Вылюты',
+    plural: 'Валюты',
   },
   admin: {
     useAsTitle: 'name',
     group: 'Настройки',
     defaultColumns: [
       'name',
-      'text',
       'sign',
     ],
   },
+  timestamps: false,
   fields: [
     {
       name: 'name',
-      type: 'text',
-    },
-    {
-      name: 'flag',
+      label: 'Название',
       type: 'text',
     },
     {
       name: 'sign',
+      label: 'Знак',
       type: 'text',
     },
   ]

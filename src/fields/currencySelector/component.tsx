@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { SelectInput, useField } from 'payload/components/forms';
 
-export const CustomSelectComponent: FC<{ path: string }> = ({ path }) => {
+const CurrencySelectComponent: FC<{ path: string }> = ({ path }) => {
   const { value, setValue } = useField<string>({ path });
   const [options, setOptions] = useState([]);
 
@@ -14,7 +14,7 @@ export const CustomSelectComponent: FC<{ path: string }> = ({ path }) => {
 
         const currencyOptions = data.docs.map((item) => {
           return {
-            label: `${item.name + ' ' + item.flag}`,
+            label: item.name,
             value: item.sign,
           };
         });
@@ -35,7 +35,7 @@ export const CustomSelectComponent: FC<{ path: string }> = ({ path }) => {
   return (
     <div>
       <label className='field-label'>
-        (cust) Currencies
+        Валюта
       </label>
       <SelectInput
         path={path}
@@ -47,3 +47,5 @@ export const CustomSelectComponent: FC<{ path: string }> = ({ path }) => {
     </div>
   )
 };
+
+export default CurrencySelectComponent;
