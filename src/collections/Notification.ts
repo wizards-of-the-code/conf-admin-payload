@@ -1,4 +1,5 @@
 import { CollectionBeforeChangeHook, CollectionConfig } from 'payload/types';
+import dateValidation from '../utils/dateValidation';
 
 const addCreationData: CollectionBeforeChangeHook = async ({ 
   data, 
@@ -131,7 +132,8 @@ const Notifications: CollectionConfig = {
           timeFormat: 'HH:mm',
           pickerAppearance: 'dayAndTime',
         }
-      }
+      },
+      validate: dateValidation,
     },
     {
       name: 'days_until_conf',

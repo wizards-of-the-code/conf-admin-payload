@@ -2,6 +2,10 @@ import { CollectionConfig } from 'payload/types';
 
 const Messages: CollectionConfig = {
   slug: 'messages',
+  labels: {
+    singular: 'Сообщение',
+    plural: 'Сообщения',
+  },
   admin: {
     useAsTitle: 'name',
     group: 'Настройки',

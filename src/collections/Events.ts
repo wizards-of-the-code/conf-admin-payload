@@ -1,14 +1,5 @@
 import { CollectionConfig } from 'payload/types';
-
-async function dateValidate(pickedDate) {
-  const pickedDateMs = (new Date(pickedDate)).getTime(); 
-  const currentDateMs = (new Date()).getTime();
-
-  if (pickedDateMs > currentDateMs) {
-    return true;
-  }
-  return 'Неверная дата!';
-}
+import dateValidation from '../utils/dateValidation';
 
 const Events: CollectionConfig = {
   slug: 'events',
@@ -48,7 +39,7 @@ const Events: CollectionConfig = {
               displayFormat: 'dd.MM.yyyy',
             }
           },
-          validate: dateValidate,
+          validate: dateValidation,
         },
       ],
     },
@@ -142,7 +133,7 @@ const Events: CollectionConfig = {
               pickerAppearance: 'dayAndTime',
             }
           },
-          validate: dateValidate,
+          validate: dateValidation,
         },
         {
           name: 'title',

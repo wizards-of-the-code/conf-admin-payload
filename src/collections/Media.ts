@@ -2,6 +2,10 @@ import { CollectionConfig } from 'payload/types';
 
 const Media: CollectionConfig = {
   slug: 'media',
+  labels: {
+    singular: 'Файл',
+    plural: 'Файлы',
+  },
   auth: false,
   admin: {
     group: 'Системные данные',
