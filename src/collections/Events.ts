@@ -157,6 +157,7 @@ const Events: CollectionConfig = {
           name: 'date',
           label: 'Время',
           type: 'date',
+          required: true,
           admin: {
             date: {
               displayFormat: 'HH:mm',
@@ -177,7 +178,8 @@ const Events: CollectionConfig = {
         {
           name: 'title',
           label: 'Событие',
-          type: 'text'
+          type: 'text',
+          required: true,
         },
       ],
       admin: {
