@@ -1,4 +1,24 @@
-import { CollectionConfig } from 'payload/types';
+import { CollectionConfig, FieldHook } from 'payload/types';
+
+const addUTCOffset: FieldHook = async ({ 
+  value, 
+}) => {
+  const date: Date = new Date(value);
+  const offset = new Date().getTimezoneOffset() / 60;
+  date.setHours(date.getHours() + offset);
+
+  return date;
+};
+
+const removeUTCOffset: FieldHook = async ({ 
+  value, 
+}) => {
+  const date: Date = new Date(value);
+  const offset = new Date().getTimezoneOffset() / 60;
+  date.setHours(date.getHours() - offset);
+
+  return date;
+};
 
 const Events: CollectionConfig = {
   slug: 'events',
@@ -144,7 +164,15 @@ const Events: CollectionConfig = {
               pickerAppearance: 'timeOnly',
               timeFormat: 'HH:mm',
             }
-          }
+          },
+          hooks: {
+            beforeChange: [
+              removeUTCOffset,
+            ],
+            afterRead: [
+              addUTCOffset,
+            ]
+          },
         },
         {
           name: 'title',
