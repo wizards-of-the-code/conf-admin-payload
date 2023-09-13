@@ -1,6 +1,26 @@
-import { CollectionConfig } from 'payload/types';
 import dateValidation from '../utils/dateValidation';
+import { CollectionConfig, FieldHook } from 'payload/types';
 import CurrencySelectField from '../fields/currencySelector/field'
+
+const addUTCOffset: FieldHook = async ({ 
+  value, 
+}) => {
+  const date: Date = new Date(value);
+  const offset = new Date().getTimezoneOffset() / 60;
+  date.setHours(date.getHours() + offset);
+
+  return date;
+};
+
+const removeUTCOffset: FieldHook = async ({ 
+  value, 
+}) => {
+  const date: Date = new Date(value);
+  const offset = new Date().getTimezoneOffset() / 60;
+  date.setHours(date.getHours() - offset);
+
+  return date;
+};
 
 const Events: CollectionConfig = {
   slug: 'events',
@@ -145,6 +165,14 @@ const Events: CollectionConfig = {
             }
           },
           validate: dateValidation,
+          hooks: {
+            beforeChange: [
+              removeUTCOffset,
+            ],
+            afterRead: [
+              addUTCOffset,
+            ]
+          },
         },
         {
           name: 'title',
