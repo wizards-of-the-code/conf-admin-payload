@@ -53,6 +53,7 @@ const Participants: CollectionConfig = {
       hasMany: true,
       admin: {
         allowCreate: false,
+        readOnly: true,
       }
     },
     {

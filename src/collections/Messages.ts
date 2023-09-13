@@ -25,7 +25,19 @@ const Messages: CollectionConfig = {
       fields: [
         {
           name: 'text',
-          type: 'textarea',
+          type: 'richText',
+          admin: {
+            elements: [
+              "link",
+            ],
+            leaves: [
+              "bold",
+              "italic",
+              'underline',
+              'strikethrough',
+            ],
+          },
+          required: true,
         },
       ],
     },
@@ -38,6 +50,21 @@ const Messages: CollectionConfig = {
           name: "media_id",
           type: "upload",
           relationTo: "media",
+        },
+      ],
+    },
+    {
+      name: 'links',
+      label: 'Ссылки',
+      type: 'array',
+      fields: [
+        {
+          name: 'name',
+          type: 'text',
+        },
+        {
+          name: 'url',
+          type: 'text',
         },
       ],
     },
