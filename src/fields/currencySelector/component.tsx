@@ -9,7 +9,7 @@ const CurrencySelectComponent: FC<{ path: string }> = ({ path }) => {
   useEffect(() => {
     const fetchOptions = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/currencies');
+        const response = await fetch(`http://localhost:${process.env.NGINX_PORT}/api/currencies`);
         const data = await response.json();
 
         const currencyOptions = data.docs.map((item) => {
