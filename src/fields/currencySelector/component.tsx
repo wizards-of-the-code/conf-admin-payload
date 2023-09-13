@@ -14,7 +14,7 @@ const CurrencySelectComponent: FC<{ path: string }> = ({ path }) => {
 
         const currencyOptions = data.docs.map((item) => {
           return {
-            label: item.name,
+            label: `${item.name} ( ${item.sign} )`,
             value: item.sign,
           };
         });
