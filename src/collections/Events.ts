@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload/types';
+import CurrencySelectField from '../fields/currencySelector/field'
 
 const Events: CollectionConfig = {
   slug: 'events',
@@ -50,7 +51,23 @@ const Events: CollectionConfig = {
     {
       name: 'description',
       label: 'Описание',
-      type: 'textarea'
+      type: 'richText',
+      admin: {
+        elements: [
+          "link",
+        ],
+        leaves: [
+          "bold",
+          "italic",
+          'underline',
+          'strikethrough',
+        ],
+      },
+    },
+    {
+      name: 'link',
+      label: 'Ссылка на сайт мероприятия',
+      type: 'text'
     },
     {
       name: 'location',
@@ -62,49 +79,49 @@ const Events: CollectionConfig = {
           fields: [
             {
               name: 'country',
+              label: 'Страна',
               type: 'text',
             },
             {
               name: 'city',
+              label: 'Город',
               type: 'text',
             },
           ],
         },
         {
           name: 'address',
+          label: 'Адрес',
           type: 'text',
         },
       ]
-    },
-    {
-      name: 'link',
-      type: 'text'
     },
     {
       type: 'row',
       fields: [
         {
           name: 'current_price',
+          label: 'Цена билета',
           type: 'text',
           admin: {
-            width: '40%',
+            width: '30%',
           },
         },
         {
           name: 'partner_price',
+          label: 'Цена билета за +1',
           type: 'text',
           admin: {
-            width: '40%',
+            width: '30%',
           },
         },
-        {
-          name: 'currency',
-          type: 'text',
-          admin: {
-            width: '20%',
-          },
-        },
+        CurrencySelectField,
       ],
+    },
+    {
+      name: 'tickets_link',
+      label: 'Ссылка на билеты',
+      type: 'text',
     },
     {
       label: 'Расписание',
@@ -113,16 +130,19 @@ const Events: CollectionConfig = {
       fields: [
         {
           name: 'date',
+          label: 'Время',
           type: 'date',
           admin: {
             date: {
               displayFormat: 'HH:mm',
-              pickerAppearance: 'dayAndTime',
+              pickerAppearance: 'timeOnly',
+              timeFormat: 'HH:mm',
             }
           }
         },
         {
           name: 'title',
+          label: 'Событие',
           type: 'text'
         },
       ],
@@ -160,7 +180,18 @@ const Events: CollectionConfig = {
         {
           name: 'topic_description',
           label: 'Описание',
-          type: 'textarea',
+          type: 'richText',
+          admin: {
+            elements: [
+              "link",
+            ],
+            leaves: [
+              "bold",
+              "italic",
+              'underline',
+              'strikethrough',
+            ],
+          },
           required: true,
         },
       ],
@@ -174,12 +205,18 @@ const Events: CollectionConfig = {
       },
     },
     {
+      name: 'tg_channel',
+      label: 'Групповой чат в Telegram',
+      type: 'text',
+    },
+    {
       name: 'participants',
       type: 'relationship',
       relationTo: 'participants',
       hasMany: true,
       admin: {
         allowCreate: false,
+        readOnly: true,
       }
     },
   ]
