@@ -30,20 +30,24 @@ const Participants: CollectionConfig = {
       fields: [
         {
           name: 'tg_id',
+          label: 'Telegram ID',
           type: 'number',
           required: true,
         },
         {
           name: 'username',
+          label: 'Username',
           type: 'text',
           required: true,
         },
         {
           name: 'first_name',
+          label: 'Имя',
           type: 'text',
         },
         {
           name: 'last_name',
+          label: 'Фамилия',
           type: 'text',
         },
       ],
