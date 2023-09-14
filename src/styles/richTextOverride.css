@@ -1,3 +1,7 @@
-.rich-text__editor {
-  font-family: 'Roboto', sans-serif !important;
+:root {
+  --font-serif: 'Roboto', sans-serif;
 }
+
+/* .rich-text__editor {
+  font-family: 'Roboto', sans-serif !important;
+} */
