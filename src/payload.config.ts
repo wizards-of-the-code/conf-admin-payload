@@ -18,7 +18,7 @@ dotenv.config({
 export default buildConfig({
   admin: {
     user: Users.slug,
-    css: path.resolve(__dirname, 'styles/richTextOverride.css'),
+    css: path.resolve(__dirname, 'styles/override.css'),
   },
   upload: {
     limits: {

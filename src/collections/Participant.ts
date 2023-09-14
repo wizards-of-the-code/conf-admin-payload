@@ -1,4 +1,7 @@
 import { CollectionConfig, FieldHook } from 'payload/types';
+import { useEffect, useState } from 'react';
+import formatDateToDdMmYyyy from '../utils/dateFormat';
+import ContactUserButtonField from '../fields/contactButton/field';
 
 const getUsername: FieldHook = async ({ data }) => {
   return `@${data.tg.username}`;
@@ -20,6 +23,7 @@ const Participants: CollectionConfig = {
     ],
   },
   fields: [
+    ContactUserButtonField,
     {
       name: 'tg',
       label: 'Пользователь',
@@ -28,33 +32,83 @@ const Participants: CollectionConfig = {
       fields: [
         {
           name: 'tg_id',
+          label: 'Telegram ID',
           type: 'number',
           required: true,
         },
         {
           name: 'username',
+          label: 'Username',
           type: 'text',
           required: true,
         },
         {
           name: 'first_name',
+          label: 'Имя',
           type: 'text',
         },
         {
           name: 'last_name',
+          label: 'Фамилия',
           type: 'text',
         },
       ],
     },
     {
       name: 'events',
-      type: 'relationship',
-      relationTo: 'events',
-      hasMany: true,
+      label: 'Конференции',
+      type: 'array',
+      fields: [
+        {
+          name: 'event_id',
+          label: 'Конференция',
+          type: 'relationship',
+          relationTo: 'events',
+          hasMany: false,
+          admin: {
+            allowCreate: false,
+            readOnly: true,
+          },
+        },
+        {
+          name: 'role',
+          label: 'Роль',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'is_payed',
+          label: 'Оплачено',
+          type: 'checkbox',
+          required: true,
+        },
+        {
+          name: 'attended',
+          label: 'Присутствовал(а) на конфе',
+          type: 'checkbox',
+          required: true,
+        },
+      ],
       admin: {
-        allowCreate: false,
-        readOnly: true,
-      }
+        initCollapsed: true,
+        components: {
+          RowLabel: ({ data, index = 0 }) => {
+            const [label, setLabel] = useState('');
+      
+            useEffect(() => {
+              fetch(
+                `http://${process.env.PAYLOAD_PUBLIC_CMS_URL}:${process.env.PAYLOAD_PUBLIC_NGINX_PORT}/api/events/${data.event_id}`
+              ).then(async (res) => {
+                const event = await res.json();
+
+                setLabel(`${event.name}${event.datetime ? ` - ${formatDateToDdMmYyyy(event.datetime)}` : ''}`);
+              })
+            }, []);
+      
+            return label;
+          },
+        },
+      },
     },
     {
       name: 'username',
