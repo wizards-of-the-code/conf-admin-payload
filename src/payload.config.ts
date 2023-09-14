@@ -9,6 +9,11 @@ import Notifications from './collections/Notification';
 import Media from './collections/Media';
 import { relationshipsAsObjectID } from '@payloadcms/plugin-relationship-object-ids';
 import Currencies from './collections/Currencies';
+import dotenv from 'dotenv';
+
+dotenv.config({
+  path: path.resolve(__dirname, '../.env'),
+});
 
 export default buildConfig({
   admin: {

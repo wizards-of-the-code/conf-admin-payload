@@ -24,7 +24,7 @@ services:
     volumes:
       - /var/payload-admin/media:/var/payload-admin/media
     ports:
-      - "${NGINX_PORT:-80}:80"
+      - "${PAYLOAD_PUBLIC_NGINX_PORT:-80}:80"
     depends_on:
       - payload
 

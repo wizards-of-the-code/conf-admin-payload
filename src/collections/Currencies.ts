@@ -6,6 +6,7 @@ const Currencies: CollectionConfig = {
     singular: 'Валюта',
     plural: 'Валюты',
   },
+  auth: false,
   admin: {
     useAsTitle: 'name',
     group: 'Настройки',
