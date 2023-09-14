@@ -12,11 +12,15 @@ const ContactUserButtonComponent = () => {
 
   return (
     <div>
-        <button 
-          className="btn btn--style-secondary btn--icon-style-without-border btn--size-medium btn--icon-position-right"
-          onClick={handleClick}>
-          Свзязаться с @{username.toString()}
-        </button>
+      {
+        username ? (
+          <button 
+            className="btn btn--style-secondary btn--icon-style-without-border btn--size-medium btn--icon-position-right"
+            onClick={handleClick}>
+            Свзязаться с @{username.toString()}
+          </button>
+        ) : ''
+      }
     </div>
   );
 };
