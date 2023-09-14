@@ -55,6 +55,7 @@ const Participants: CollectionConfig = {
       fields: [
         {
           name: 'event_id',
+          label: 'Конференция',
           type: 'relationship',
           relationTo: 'events',
           hasMany: false,
@@ -90,7 +91,7 @@ const Participants: CollectionConfig = {
       
             useEffect(() => {
               fetch(
-                `http://${PAYLOAD_PUBLIC_CMS_URL}:${PAYLOAD_PUBLIC_NGINX_PORT}/api/events/${data.event_id}`
+                `http://${process.env.PAYLOAD_PUBLIC_CMS_URL}:${process.env.PAYLOAD_PUBLIC_NGINX_PORT}/api/events/${data.event_id}`
               ).then(async (res) => {
                 const event = await res.json();
 
