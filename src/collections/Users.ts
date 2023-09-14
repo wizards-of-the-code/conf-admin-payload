@@ -3,8 +3,8 @@ import { CollectionConfig } from 'payload/types';
 const Users: CollectionConfig = {
   slug: 'users',
   labels: {
-    singular: 'Пользователь',
-    plural: 'Пользователи',
+    singular: 'Администратор',
+    plural: 'Администраторы',
   },
   auth: true,
   admin: {
