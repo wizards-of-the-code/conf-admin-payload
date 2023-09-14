@@ -38,6 +38,7 @@ const Notifications: CollectionConfig = {
   fields: [
     {
       name: 'is_active',
+      label: 'Активно',
       type: 'checkbox',
       defaultValue: false,
     },
@@ -148,6 +149,7 @@ const Notifications: CollectionConfig = {
     },
     {
       name: 'days_until_conf',
+      label: 'Дней до конференции',
       type: 'number',
     },
   ],
