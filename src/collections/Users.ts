@@ -2,6 +2,10 @@ import { CollectionConfig } from 'payload/types';
 
 const Users: CollectionConfig = {
   slug: 'users',
+  labels: {
+    singular: 'Администратор',
+    plural: 'Администраторы',
+  },
   auth: true,
   admin: {
     useAsTitle: 'email',

@@ -1,3 +1,4 @@
+import dateValidation from '../utils/dateValidation';
 import { CollectionConfig, FieldHook } from 'payload/types';
 import CurrencySelectField from '../fields/currencySelector/field'
 
@@ -58,7 +59,8 @@ const Events: CollectionConfig = {
             date: {
               displayFormat: 'dd.MM.yyyy',
             }
-          }
+          },
+          validate: dateValidation,
         },
       ],
     },
@@ -91,6 +93,7 @@ const Events: CollectionConfig = {
     },
     {
       name: 'location',
+      label: 'Место проведения',
       type: 'group',
       interfaceName: "Location",
       fields: [
@@ -101,11 +104,13 @@ const Events: CollectionConfig = {
               name: 'country',
               label: 'Страна',
               type: 'text',
+              required: true,
             },
             {
               name: 'city',
               label: 'Город',
               type: 'text',
+              required: true,
             },
           ],
         },
@@ -160,6 +165,7 @@ const Events: CollectionConfig = {
               timeFormat: 'HH:mm',
             }
           },
+          validate: dateValidation,
           hooks: {
             beforeChange: [
               removeUTCOffset,
@@ -241,6 +247,7 @@ const Events: CollectionConfig = {
     },
     {
       name: 'participants',
+      label: 'Участники',
       type: 'relationship',
       relationTo: 'participants',
       hasMany: true,
