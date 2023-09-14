@@ -109,12 +109,6 @@ const Events: CollectionConfig = {
         {
           type: 'row',
           fields: [
-            {
-              name: 'country',
-              label: 'Страна',
-              type: 'text',
-              required: true,
-            },
             CountrySelector,
             {
               name: 'city',

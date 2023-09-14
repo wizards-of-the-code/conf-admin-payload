@@ -1,4 +1,4 @@
-import countrySelectComponent from "./component";
+import CountrySelectComponent from "./component";
 import { Field } from 'payload/types';
 
 
@@ -8,10 +8,11 @@ const CountrySelector: Field = {
     type: 'text',
     admin: {
         components: {
-            Field: countrySelectComponent,
-            width: '30%',
-        }
+            Field: CountrySelectComponent,
+        },
+        width: '30%',
     },
+    required: true,
 };
 
 export default CountrySelector;
