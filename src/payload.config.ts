@@ -13,6 +13,7 @@ import Currencies from './collections/Currencies';
 export default buildConfig({
   admin: {
     user: Users.slug,
+    css: path.resolve(__dirname, 'styles/richTextOverride.css'),
   },
   upload: {
     limits: {
