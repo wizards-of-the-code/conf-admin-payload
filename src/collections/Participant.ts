@@ -90,7 +90,7 @@ const Participants: CollectionConfig = {
       
             useEffect(() => {
               fetch(
-                `http://localhost:3000/api/events/${data.event_id}`
+                `http://${PAYLOAD_PUBLIC_CMS_URL}:${PAYLOAD_PUBLIC_NGINX_PORT}/api/events/${data.event_id}`
               ).then(async (res) => {
                 const event = await res.json();
 
