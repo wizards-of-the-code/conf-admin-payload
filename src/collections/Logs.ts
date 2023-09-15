@@ -1,9 +1,16 @@
 import { CollectionConfig } from 'payload/types';
+import getUsername from '../hooks/getUsername';
 
 const Logs: CollectionConfig = {
   slug: 'logs',
   admin: {
     group: 'Системные данные',
+    defaultColumns: [
+      'datetime',
+      'username',
+      'status',
+      'message',
+    ],
   },
   labels: {
     singular: 'Лог',
@@ -16,7 +23,7 @@ const Logs: CollectionConfig = {
       type: 'date',
       admin: {
         date: {
-          displayFormat: 'dd.MM.yyyy mm:ss',
+          displayFormat: 'dd.MM.yyyy HH:mm:ss',
         }
       }
     },
@@ -36,13 +43,33 @@ const Logs: CollectionConfig = {
       ]
     },
     {
-      name: 'event',
+      name: 'status',
+      label: 'Статус',
       type: 'text'
     },
     {
       name: 'message',
+      label: 'Сообщение',
       type: 'text'
     },
+    {
+      name: 'initiator',
+      label: 'Пользователь',
+      type: 'text',
+      access: {
+        create: () => false,
+        update: () => false,
+      },
+      hooks: {
+        beforeChange: [
+          ({ siblingData }) => {
+            // Ensures data is not stored in DB
+            delete siblingData['username'];
+          }
+        ],
+        afterRead: [getUsername],
+      },
+    }
   ],
 };
 

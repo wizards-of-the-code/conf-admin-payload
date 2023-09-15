@@ -1,11 +1,8 @@
-import { CollectionConfig, FieldHook } from 'payload/types';
+import { CollectionConfig } from 'payload/types';
 import { useEffect, useState } from 'react';
 import formatDateToDdMmYyyy from '../utils/dateFormat';
 import ContactUserButtonField from '../fields/contactButton/field';
-
-const getUsername: FieldHook = async ({ data }) => {
-  return `@${data.tg.username}`;
-};
+import getUsername from '../hooks/getUsername';
 
 const Participants: CollectionConfig = {
   slug: 'participants',
