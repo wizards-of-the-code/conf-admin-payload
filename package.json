@@ -20,6 +20,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "functions-have-names": "^1.2.3",
+    "i18n-iso-countries": "^7.7.0",
     "payload": "latest"
   },
   "devDependencies": {

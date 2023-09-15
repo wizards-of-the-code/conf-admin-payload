@@ -1,9 +1,10 @@
 import dateValidation from '../utils/dateValidation';
 import { CollectionConfig, FieldHook } from 'payload/types';
-import CurrencySelectField from '../fields/currencySelector/field'
+import CurrencySelectField from '../fields/currencySelector/field';
+import CountrySelectorField from '../fields/countrySelector/field';
 
-const addUTCOffset: FieldHook = async ({ 
-  value, 
+const addUTCOffset: FieldHook = async ({
+  value,
 }) => {
   const date: Date = new Date(value);
   const offset = new Date().getTimezoneOffset() / 60;
@@ -12,8 +13,8 @@ const addUTCOffset: FieldHook = async ({
   return date;
 };
 
-const removeUTCOffset: FieldHook = async ({ 
-  value, 
+const removeUTCOffset: FieldHook = async ({
+  value,
 }) => {
   const date: Date = new Date(value);
   const offset = new Date().getTimezoneOffset() / 60;
@@ -21,6 +22,14 @@ const removeUTCOffset: FieldHook = async ({
 
   return date;
 };
+
+const validatePrice = async (inputValue) => {
+  const value = parseFloat(inputValue);
+  if (!isNaN(value) && value >= 0) {
+    return true;
+  }
+  return 'Введите числовое значение больше 0';
+}
 
 const Events: CollectionConfig = {
   slug: 'events',
@@ -68,7 +77,7 @@ const Events: CollectionConfig = {
       name: 'is_active',
       label: 'Активная',
       type: 'checkbox',
-      defaultValue: true,
+      defaultValue: false,
     },
     {
       name: 'description',
@@ -100,12 +109,7 @@ const Events: CollectionConfig = {
         {
           type: 'row',
           fields: [
-            {
-              name: 'country',
-              label: 'Страна',
-              type: 'text',
-              required: true,
-            },
+            CountrySelectorField,
             {
               name: 'city',
               label: 'Город',
@@ -131,6 +135,7 @@ const Events: CollectionConfig = {
           admin: {
             width: '30%',
           },
+          validate: validatePrice,
         },
         {
           name: 'partner_price',
@@ -139,6 +144,7 @@ const Events: CollectionConfig = {
           admin: {
             width: '30%',
           },
+          validate: validatePrice,
         },
         CurrencySelectField,
       ],
