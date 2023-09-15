@@ -1,7 +1,7 @@
 import dateValidation from '../utils/dateValidation';
 import { CollectionConfig, FieldHook } from 'payload/types';
 import CurrencySelectField from '../fields/currencySelector/field';
-import CountrySelector from '../fields/countrySelector/field';
+import CountrySelectorField from '../fields/countrySelector/field';
 
 const addUTCOffset: FieldHook = async ({
   value,
@@ -109,7 +109,7 @@ const Events: CollectionConfig = {
         {
           type: 'row',
           fields: [
-            CountrySelector,
+            CountrySelectorField,
             {
               name: 'city',
               label: 'Город',
