@@ -2,7 +2,7 @@ import CountrySelectComponent from "./component";
 import { Field } from 'payload/types';
 
 
-const CountrySelector: Field = {
+const CountrySelectorField: Field = {
     name: 'country',
     label: 'Страна',
     type: 'text',
