@@ -11,6 +11,12 @@ const Logs: CollectionConfig = {
       'status',
       'message',
     ],
+    
+  },
+  access: {
+    create: () => false,
+    update: () => false,
+    delete: () => false,
   },
   labels: {
     singular: 'Лог',
@@ -33,11 +39,13 @@ const Logs: CollectionConfig = {
       interfaceName: "Initiator",
       fields: [
         {
-          name: 'id',
+          name: 'tg_id',
+          label: 'Telegram ID',
           type: 'number',
         },
         {
-          name: 'name',
+          name: 'username',
+          label: 'Пользователь',
           type: 'text',
         },
       ]
