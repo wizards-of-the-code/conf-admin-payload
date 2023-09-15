@@ -1,5 +1,5 @@
 import { CollectionConfig } from 'payload/types';
-import getUsername from '../hooks/getUsername';
+import getLogInitiator from '../hooks/getLogInitiator';
 
 const Logs: CollectionConfig = {
   slug: 'logs',
@@ -53,7 +53,7 @@ const Logs: CollectionConfig = {
       type: 'text'
     },
     {
-      name: 'initiator',
+      name: 'username',
       label: 'Пользователь',
       type: 'text',
       access: {
@@ -67,7 +67,7 @@ const Logs: CollectionConfig = {
             delete siblingData['username'];
           }
         ],
-        afterRead: [getUsername],
+        afterRead: [getLogInitiator],
       },
     }
   ],
