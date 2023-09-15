@@ -1,5 +1,5 @@
 /**
- * Validate time for format HH:mm
+ * Validate time for formats HH:mm or H:mm
  * @param {string} time Time in string format.
  * @returns true if time is correct, Error string if otherwise.
  */
