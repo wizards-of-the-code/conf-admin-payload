@@ -7,6 +7,7 @@ const addUTCOffset: FieldHook = async ({
 }) => {
   const date: Date = new Date(value);
   const offset = new Date().getTimezoneOffset() / 60;
+  console.log('offset', offset);
   date.setHours(date.getHours() + offset);
 
   return date;
@@ -17,6 +18,7 @@ const removeUTCOffset: FieldHook = async ({
 }) => {
   const date: Date = new Date(value);
   const offset = new Date().getTimezoneOffset() / 60;
+  console.log('offset', offset);
   date.setHours(date.getHours() - offset);
 
   return date;
