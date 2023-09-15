@@ -1,28 +1,7 @@
 import dateValidation from '../utils/dateValidation';
+import validateTime from '../utils/validateTime';
 import { CollectionConfig, FieldHook } from 'payload/types';
 import CurrencySelectField from '../fields/currencySelector/field'
-
-const addUTCOffset: FieldHook = async ({ 
-  value, 
-}) => {
-  const date: Date = new Date(value);
-  const offset = new Date().getTimezoneOffset() / 60;
-  console.log('offset', offset);
-  date.setHours(date.getHours() + offset);
-
-  return date;
-};
-
-const removeUTCOffset: FieldHook = async ({ 
-  value, 
-}) => {
-  const date: Date = new Date(value);
-  const offset = new Date().getTimezoneOffset() / 60;
-  console.log('offset', offset);
-  date.setHours(date.getHours() - offset);
-
-  return date;
-};
 
 const Events: CollectionConfig = {
   slug: 'events',
@@ -156,25 +135,11 @@ const Events: CollectionConfig = {
       type: 'array',
       fields: [
         {
-          name: 'date',
+          name: 'time',
           label: 'Время',
-          type: 'date',
+          type: 'text',
+          validate: validateTime,
           required: true,
-          admin: {
-            date: {
-              displayFormat: 'HH:mm',
-              pickerAppearance: 'timeOnly',
-              timeFormat: 'HH:mm',
-            }
-          },
-          hooks: {
-            beforeChange: [
-              removeUTCOffset,
-            ],
-            afterRead: [
-              addUTCOffset,
-            ]
-          },
         },
         {
           name: 'title',
@@ -187,7 +152,7 @@ const Events: CollectionConfig = {
         initCollapsed: true,
         components: {
           RowLabel: ({ data, index = 0 }) => {
-            return data ? `${new Date(data.date).toLocaleTimeString().slice(0, 5)} - ${data.title}` : 'undefined';
+            return data ? `${data.time} - ${data.title}` : 'undefined';
           },
         },
       },
