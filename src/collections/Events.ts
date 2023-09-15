@@ -165,7 +165,6 @@ const Events: CollectionConfig = {
               timeFormat: 'HH:mm',
             }
           },
-          validate: dateValidation,
           hooks: {
             beforeChange: [
               removeUTCOffset,
