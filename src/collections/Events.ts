@@ -1,7 +1,8 @@
 import dateValidation from '../utils/dateValidation';
 import validateTime from '../utils/validateTime';
 import { CollectionConfig, FieldHook } from 'payload/types';
-import CurrencySelectField from '../fields/currencySelector/field'
+import CurrencySelectField from '../fields/currencySelector/field';
+import CountrySelectorField from '../fields/countrySelector/field';
 
 const Events: CollectionConfig = {
   slug: 'events',
@@ -49,7 +50,7 @@ const Events: CollectionConfig = {
       name: 'is_active',
       label: 'Активная',
       type: 'checkbox',
-      defaultValue: true,
+      defaultValue: false,
     },
     {
       name: 'description',
@@ -81,12 +82,7 @@ const Events: CollectionConfig = {
         {
           type: 'row',
           fields: [
-            {
-              name: 'country',
-              label: 'Страна',
-              type: 'text',
-              required: true,
-            },
+            CountrySelectorField,
             {
               name: 'city',
               label: 'Город',
@@ -112,6 +108,7 @@ const Events: CollectionConfig = {
           admin: {
             width: '30%',
           },
+          validate: validatePrice,
         },
         {
           name: 'partner_price',
@@ -120,6 +117,7 @@ const Events: CollectionConfig = {
           admin: {
             width: '30%',
           },
+          validate: validatePrice,
         },
         CurrencySelectField,
       ],
