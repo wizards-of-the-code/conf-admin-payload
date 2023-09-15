@@ -15,4 +15,4 @@ const CountrySelectorField: Field = {
     required: true,
 };
 
-export default CountrySelector;
+export default CountrySelectorField;
