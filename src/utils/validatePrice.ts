@@ -1,5 +1,5 @@
 async function validatePrice(inputValue: string) {
-    const regex = /^[+]?\d+(\.\d+)?$/;
+    const regex = /^\d+(\.\d+)?$/;
 
   if (regex.test(inputValue) && parseFloat(inputValue) >= 0) {
     return true;
