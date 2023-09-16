@@ -36,7 +36,6 @@ const Logs: CollectionConfig = {
     {
       name: 'initiator',
       type: 'group',
-      interfaceName: "Initiator",
       fields: [
         {
           name: 'tg_id',
