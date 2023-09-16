@@ -1,5 +1,5 @@
 import { CollectionConfig } from 'payload/types';
-import getLogInitiator from '../hooks/getLogInitiator';
+import LogUsernameField from '../fields/logUsername/field';
 
 const Logs: CollectionConfig = {
   slug: 'logs',
@@ -11,7 +11,7 @@ const Logs: CollectionConfig = {
       'status',
       'message',
     ],
-    
+    useAsTitle: 'username',
   },
   access: {
     create: () => false,
@@ -60,24 +60,7 @@ const Logs: CollectionConfig = {
       label: 'Сообщение',
       type: 'text'
     },
-    {
-      name: 'username',
-      label: 'Пользователь',
-      type: 'text',
-      access: {
-        create: () => false,
-        update: () => false,
-      },
-      hooks: {
-        beforeChange: [
-          ({ siblingData }) => {
-            // Ensures data is not stored in DB
-            delete siblingData['username'];
-          }
-        ],
-        afterRead: [getLogInitiator],
-      },
-    }
+    LogUsernameField,
   ],
 };
 
