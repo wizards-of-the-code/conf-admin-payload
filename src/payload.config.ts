@@ -10,6 +10,7 @@ import Media from './collections/Media';
 import { relationshipsAsObjectID } from '@payloadcms/plugin-relationship-object-ids';
 import Currencies from './collections/Currencies';
 import dotenv from 'dotenv';
+import { Logo } from './components/Logo';
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -19,6 +20,12 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     css: path.resolve(__dirname, 'styles/override.css'),
+    components: {
+      graphics: {
+        Logo: Logo,
+        Icon: Logo,
+      },
+    },
   },
   upload: {
     limits: {
