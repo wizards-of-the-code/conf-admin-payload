@@ -13,6 +13,8 @@ import dotenv from 'dotenv';
 import { Logo } from './components/Logo';
 import WBFooters from './collections/WBFooters';
 import WBChats from './collections/WBChats';
+import CustomDefaultRoute from './pages/customPage';
+import AfterNavLinks from './components/AfterNavLinks';
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -27,6 +29,15 @@ export default buildConfig({
         Logo: Logo,
         Icon: Logo,
       },
+      routes: [
+        {
+          path: '/custom-default-route',
+          Component: CustomDefaultRoute,
+        },
+      ],
+      afterNavLinks: [
+        AfterNavLinks,
+      ],
     },
   },
   upload: {
