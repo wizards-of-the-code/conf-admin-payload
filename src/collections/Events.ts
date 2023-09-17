@@ -70,6 +70,22 @@ const Events: CollectionConfig = {
       },
     },
     {
+      name: 'activities',
+      label: 'Активности',
+      type: 'richText',
+      admin: {
+        elements: [
+          "link",
+        ],
+        leaves: [
+          "bold",
+          "italic",
+          'underline',
+          'strikethrough',
+        ],
+      },
+    },
+    {
       name: 'link',
       label: 'Ссылка на сайт мероприятия',
       type: 'text'
