@@ -11,7 +11,7 @@ import { relationshipsAsObjectID } from '@payloadcms/plugin-relationship-object-
 import Currencies from './collections/Currencies';
 import dotenv from 'dotenv';
 import { Logo } from './components/Logo';
-import WBFooter from './collections/WBFooter';
+import WBFooters from './collections/WBFooters';
 import WBChats from './collections/WBChats';
 
 dotenv.config({
@@ -43,7 +43,7 @@ export default buildConfig({
     Notifications,
     Logs,
     Media,
-    WBFooter,
+    WBFooters,
     WBChats
   ],
   typescript: {

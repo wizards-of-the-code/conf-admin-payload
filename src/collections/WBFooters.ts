@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload/types';
 
-const WBFooter: CollectionConfig = {
+const WBFooters: CollectionConfig = {
   slug: 'welcome-bot_footer',
   labels: {
     singular: 'Footer',
@@ -28,4 +28,4 @@ const WBFooter: CollectionConfig = {
   ],
 };
 
-export default WBFooter;
+export default WBFooters;
