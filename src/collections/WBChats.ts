@@ -1,7 +1,7 @@
 import { CollectionConfig } from 'payload/types';
 
 const WBChats: CollectionConfig = {
-  slug: 'welcome-bot_chat-settings',
+  slug: 'wb-chat-settings',
   labels: {
     singular: 'Chat',
     plural: 'Chats',
@@ -29,7 +29,7 @@ const WBChats: CollectionConfig = {
       name: 'footer',
       label: 'Footer',
       type: 'relationship',
-      relationTo: 'welcome-bot_footer',
+      relationTo: 'wb-chat-footers',
       hasMany: false,
       admin: {
         allowCreate: false,

@@ -1,7 +1,7 @@
 import { CollectionConfig } from 'payload/types';
 
 const WBFooters: CollectionConfig = {
-  slug: 'welcome-bot_footer',
+  slug: 'wb-chat-footers',
   labels: {
     singular: 'Footer',
     plural: 'Footers',
