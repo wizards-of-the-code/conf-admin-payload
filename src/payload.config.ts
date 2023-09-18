@@ -43,8 +43,8 @@ export default buildConfig({
     Notifications,
     Logs,
     Media,
+    WBChats,
     WBFooters,
-    WBChats
   ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),

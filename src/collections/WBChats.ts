@@ -3,8 +3,8 @@ import { CollectionConfig } from 'payload/types';
 const WBChats: CollectionConfig = {
   slug: 'wb-chat-settings',
   labels: {
-    singular: 'Chat',
-    plural: 'Chats',
+    singular: 'Чат',
+    plural: 'Чаты',
   },
   admin: {
     useAsTitle: 'chatTitle',

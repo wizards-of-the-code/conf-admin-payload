@@ -3,8 +3,8 @@ import { CollectionConfig } from 'payload/types';
 const WBFooters: CollectionConfig = {
   slug: 'wb-chat-footers',
   labels: {
-    singular: 'Footer',
-    plural: 'Footers',
+    singular: 'Футер',
+    plural: 'Футеры',
   },
   admin: {
     useAsTitle: 'title',
