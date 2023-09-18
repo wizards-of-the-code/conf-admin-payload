@@ -11,7 +11,8 @@ import { relationshipsAsObjectID } from '@payloadcms/plugin-relationship-object-
 import Currencies from './collections/Currencies';
 import dotenv from 'dotenv';
 import { Logo } from './components/Logo';
-import WBFooter from './collections/WB-Footer';
+import WBFooter from './collections/WBFooter';
+import WBChats from './collections/WBChats';
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -42,7 +43,8 @@ export default buildConfig({
     Notifications,
     Logs,
     Media,
-    WBFooter
+    WBFooter,
+    WBChats
   ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
