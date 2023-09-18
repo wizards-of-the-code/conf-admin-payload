@@ -9,10 +9,12 @@ const WBChats: CollectionConfig = {
   admin: {
     useAsTitle: 'message',
     group: 'Welcome Bot',
+    defaultColumns: [
+      'chatTitle',
+      'message',
+    ],
   },
   fields: [
-    // Email added by default
-    // Add more fields as needed
     {
       name: 'chatTitle',
       label: 'Название чата',
