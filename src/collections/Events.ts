@@ -43,7 +43,7 @@ const Events: CollectionConfig = {
               displayFormat: 'dd.MM.yyyy',
             }
           },
-          validate: dateValidation,
+          //validate: dateValidation,
         },
       ],
     },
