@@ -48,10 +48,21 @@ const Events: CollectionConfig = {
       ],
     },
     {
-      name: 'is_active',
-      label: 'Активная',
-      type: 'checkbox',
-      defaultValue: false,
+      type: 'row',
+      fields: [
+        {
+          name: 'is_active',
+          label: 'Активная',
+          type: 'checkbox',
+          defaultValue: false,
+        },
+        {
+          name: 'is_finished',
+          label: 'Завершена',
+          type: 'checkbox',
+          defaultValue: false,
+        },
+      ],
     },
     {
       name: 'description',
