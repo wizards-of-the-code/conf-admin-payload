@@ -7,19 +7,11 @@ const WBFooters: CollectionConfig = {
     plural: 'Footers',
   },
   admin: {
-    useAsTitle: 'name',
+    useAsTitle: 'message',
     group: 'Welcome Bot',
-    defaultColumns: [
-      'name',
-      'message',
-    ],
+    defaultColumns: ['message'],
   },
   fields: [
-    {
-      name: 'name',
-      label: 'Название',
-      type: 'text',
-    },
     {
       name: 'message',
       label: 'Сообщение',

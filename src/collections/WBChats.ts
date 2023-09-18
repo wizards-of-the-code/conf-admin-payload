@@ -7,7 +7,7 @@ const WBChats: CollectionConfig = {
     plural: 'Chats',
   },
   admin: {
-    useAsTitle: 'message',
+    useAsTitle: 'chatTitle',
     group: 'Welcome Bot',
     defaultColumns: [
       'chatTitle',
