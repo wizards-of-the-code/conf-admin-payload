@@ -1,6 +1,8 @@
 import React from "react";
 import CopySvg from '../../assets/svgs/file-copy-line.svg';
 import "./index.scss";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const baseClass = "copy-link-cell";
 
@@ -18,6 +20,7 @@ const EventLinkCell: React.FC<CustomCellProps> = (props) => {
   const handleClick = (e: React.SyntheticEvent) => {
     e.preventDefault();
     navigator.clipboard.writeText(`https://t.me/ConfMerchantBot?start=${rowData.id}`);
+    toast.success("Ссылка скопирована в буфер обмена!");
   }
 
   return <span className={baseClass}>

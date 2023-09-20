@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { useDocumentInfo } from 'payload/components/utilities';
+import { toast } from 'react-toastify';
 
 const EventLinkComponent: FC<{ path: string }> = ({ path }) => {
   const { id } = useDocumentInfo();
@@ -8,6 +9,7 @@ const EventLinkComponent: FC<{ path: string }> = ({ path }) => {
     e.preventDefault();
     // Copy the text inside the text field
     navigator.clipboard.writeText(`https://t.me/ConfMerchantBot?start=${id}`);
+    toast.success("Ссылка скопирована в буфер обмена!");
   };
 
   return (
