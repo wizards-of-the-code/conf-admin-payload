@@ -4,6 +4,7 @@ import validatePrice from '../utils/validatePrice';
 import { CollectionConfig, FieldHook } from 'payload/types';
 import CurrencySelectField from '../fields/currencySelector/field';
 import CountrySelectorField from '../fields/countrySelector/field';
+import EventLinkField from '../fields/eventLink/field';
 
 const Events: CollectionConfig = {
   slug: 'events',
@@ -25,6 +26,7 @@ const Events: CollectionConfig = {
     useAsTitle: 'name',
   },
   fields: [
+    EventLinkField,
     {
       type: 'row',
       fields: [
