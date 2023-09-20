@@ -7,6 +7,8 @@ import { AdminView } from 'payload/config';
 import { useStepNav } from 'payload/components/hooks';
 import { useConfig, Meta } from 'payload/components/utilities';
 
+import CustomList from '../components/List/List';
+
 const CustomDefaultRoute: AdminView = ({ user, canAccessAdmin }) => {
   const { routes: { admin: adminRoute } } = useConfig();
   const { setStepNav } = useStepNav();
@@ -40,7 +42,7 @@ const CustomDefaultRoute: AdminView = ({ user, canAccessAdmin }) => {
       <Eyebrow />
       <div className="gutter--left gutter--right collection-list__wrap">
         <h1>Custom Route</h1>
-        <p>Here is a custom route that was added in the Payload config. It uses the Default Template, so the sidebar is rendered.</p>
+        <CustomList />
         <Button
           el="link"
           to={`${adminRoute}`}
