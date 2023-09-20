@@ -3,6 +3,7 @@ import CopySvg from '../../assets/svgs/file-copy-line.svg';
 import "./index.scss";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import handleCopyLink from "./handleCopyLink";
 
 const baseClass = "copy-link-cell";
 
@@ -17,14 +18,8 @@ type CustomCellProps = {
 const EventLinkCell: React.FC<CustomCellProps> = (props) => {
   const { rowData } = props;
 
-  const handleClick = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    navigator.clipboard.writeText(`https://t.me/ConfMerchantBot?start=${rowData.id}`);
-    toast.success("Ссылка скопирована в буфер обмена!");
-  }
-
   return <span className={baseClass}>
-    <img src={CopySvg} alt="Copy bot link" onClick={handleClick} /></span>;
+    <img src={CopySvg} alt="Copy bot link" onClick={() => handleCopyLink(rowData.id)} /></span>;
 };
 
 export default EventLinkCell;
