@@ -6,7 +6,7 @@ WORKDIR /home/node/app
 COPY package*.json ./
 
 COPY . .
-RUN yarn install
+RUN yarn install --network-timeout 1000000
 RUN yarn build
 
 FROM base as runtime
@@ -18,6 +18,6 @@ WORKDIR /home/node/app
 COPY package*.json  ./
 COPY .env ./
 
-RUN yarn install --production
+RUN yarn install --production --network-timeout 1000000
 COPY --from=builder /home/node/app/dist ./dist
 COPY --from=builder /home/node/app/build ./build
