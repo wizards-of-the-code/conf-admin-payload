@@ -17,7 +17,7 @@ const EventLinkCell: React.FC<CustomCellProps> = (props) => {
   const { rowData } = props;
 
   return <span className={baseClass}>
-    <img src={CopySvg} alt="Copy bot link" onClick={() => handleCopyLink(rowData.id)} /></span>;
+    <img src={CopySvg} alt="Copy bot link" onClick={(e) => handleCopyLink(e, rowData.id)} /></span>;
 };
 
 export default EventLinkCell;

@@ -10,7 +10,7 @@ const EventLinkComponent: FC<{ path: string }> = ({ path }) => {
       <button
         type="button"
         className="btn btn--style-secondary btn--icon-style-without-border btn--size-medium btn--icon-position-right"
-        onClick={() => handleCopyLink(id)}>
+        onClick={(e) => handleCopyLink(e, id)}>
         Скопировать ссылку на мероприятие
       </button>
     </div>
