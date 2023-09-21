@@ -23,6 +23,7 @@ services:
       - payload_network
     volumes:
       - /var/payload-admin/media:/var/payload-admin/media
+      - /var/merchant-bot:/var/merchant-bot
     ports:
       - "${PAYLOAD_PUBLIC_NGINX_PORT:-80}:80"
     depends_on:
