@@ -4,8 +4,6 @@ services:
 
   payload:
     build: .
-    # ports:
-    #   - "3002:3000"
     expose:
       - 3000
     networks:
@@ -23,8 +21,8 @@ services:
       - payload_network
     volumes:
       - /var/payload-admin/media:/var/payload-admin/media
-      - /var/merchant-bot:/var/merchant-bot
-      - /var/welcome-bot/logs/:/var/welcome-bot/logs/
+      - /var/merchant-bot/logs:/var/merchant-bot/logs
+      - /var/welcome-bot/logs:/var/welcome-bot/logs
     ports:
       - "${PAYLOAD_PUBLIC_NGINX_PORT:-80}:80"
     depends_on:
