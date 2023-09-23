@@ -17,7 +17,7 @@ const ContactUserButtonComponent = () => {
           <button 
             className="btn btn--style-secondary btn--icon-style-without-border btn--size-medium btn--icon-position-right"
             onClick={handleClick}>
-            Свзязаться с @{username.toString()}
+            Связаться с @{username.toString()}
           </button>
         ) : ''
       }
