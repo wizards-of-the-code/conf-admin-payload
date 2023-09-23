@@ -143,7 +143,15 @@ const Notifications: CollectionConfig = {
           displayFormat: 'dd.MM.yyyy HH:mm',
           timeFormat: 'HH:mm',
           pickerAppearance: 'dayAndTime',
+        },
+        condition: (data) => {
+          if (data.type === 'manual') {
+            return true;
+          } else {
+            return false;
+          }
         }
+
       },
       validate: dateValidation,
     },
@@ -151,6 +159,15 @@ const Notifications: CollectionConfig = {
       name: 'days_until_conf',
       label: 'Дней до конференции',
       type: 'number',
+      admin: {
+        condition: (data) => {
+          if (data.type === 'auto') {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      }
     },
   ],
   hooks: {
