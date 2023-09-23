@@ -166,7 +166,8 @@ const Notifications: CollectionConfig = {
           } else {
             return false;
           }
-        }
+        },
+        description: 'За какое количество дней до конференции должно быть разослано данное сообщение.',
       }
     },
   ],
