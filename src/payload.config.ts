@@ -14,6 +14,7 @@ import { Logo } from './components/Logo';
 import WBFooters from './collections/WBFooters';
 import WBChats from './collections/WBChats';
 import CollapsibleNav from './components/CollapsibleNav';
+import Socials from './collections/Socials';
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -41,6 +42,7 @@ export default buildConfig({
     Participants,
     Users,
     Messages,
+    Socials,
     Currencies,
     Notifications,
     Logs,
