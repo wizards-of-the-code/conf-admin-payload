@@ -1,6 +1,8 @@
 import payload from "payload";
 import { CollectionBeforeChangeHook, CollectionConfig } from 'payload/types';
 import dateValidation from '../utils/dateValidation';
+import getPlannedDatetime from "../hooks/getPlannedDatetime";
+import PlannedDatetimeField from "../fields/plannedDatetime/field";
 
 const addCreationData: CollectionBeforeChangeHook = async ({ 
   data, 
@@ -55,7 +57,7 @@ const Notifications: CollectionConfig = {
       'is_active',
       'event_id',
       'type',
-      'datetime_to_send',
+      'planned_datetime',
       'sent',
       'images',
     ],
@@ -176,7 +178,6 @@ const Notifications: CollectionConfig = {
             return false;
           }
         }
-
       },
       validate: dateValidation,
     },
@@ -195,6 +196,7 @@ const Notifications: CollectionConfig = {
         description: 'За какое количество дней до конференции должно быть разослано данное сообщение.',
       }
     },
+    PlannedDatetimeField,
   ],
   hooks: {
     beforeChange: [
