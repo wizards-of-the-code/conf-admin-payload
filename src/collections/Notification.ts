@@ -1,7 +1,6 @@
 import payload from "payload";
 import { CollectionBeforeChangeHook, CollectionConfig } from 'payload/types';
 import dateValidation from '../utils/dateValidation';
-import getPlannedDatetime from "../hooks/getPlannedDatetime";
 import PlannedDatetimeField from "../fields/plannedDatetime/field";
 
 const addCreationData: CollectionBeforeChangeHook = async ({ 
