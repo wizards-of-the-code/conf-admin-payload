@@ -1,3 +1,4 @@
+import payload from "payload";
 import { CollectionBeforeChangeHook, CollectionConfig } from 'payload/types';
 import dateValidation from '../utils/dateValidation';
 
@@ -7,12 +8,36 @@ const addCreationData: CollectionBeforeChangeHook = async ({
   operation, 
   originalDoc, 
 }) => {
-  // add the generated simulation inside the data that will be saved to database
   if(operation === 'create') {
     data.sent = null;
   }
 
-  // return the data
+  return data;
+};
+
+const setCorrectDateHook: CollectionBeforeChangeHook = async ({
+  data, // incoming data to update or create with
+  req, // full express request
+  operation, // name of the operation ie. 'create', 'update'
+  originalDoc, // original document
+}) => {
+
+  if(data.type === 'auto') {
+    // Request 
+    const event = await payload.findByID({
+      collection: 'events',
+      id: data.event_id,
+    });
+
+    if(!event) {
+      return data;
+    }
+
+    // Set "date to send" with correction of days_until_conf field
+    const eventDate: Date = new Date(new Date(event.datetime).setUTCHours(12, 0, 0, 0));
+    data.datetime_to_send = new Date(eventDate).setDate(eventDate.getDate() - data.days_until_conf);
+  }
+
   return data;
 };
 
@@ -174,6 +199,7 @@ const Notifications: CollectionConfig = {
   hooks: {
     beforeChange: [
       addCreationData,
+      setCorrectDateHook,
     ],
   },
 };
