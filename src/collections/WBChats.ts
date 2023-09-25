@@ -19,6 +19,7 @@ const WBChats: CollectionConfig = {
       name: 'chatTitle',
       label: 'Название чата',
       type: 'text',
+      required: true,
     },
     {
       name: 'message',

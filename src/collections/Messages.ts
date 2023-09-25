@@ -61,10 +61,12 @@ const Messages: CollectionConfig = {
         {
           name: 'name',
           type: 'text',
+          required: true,
         },
         {
           name: 'url',
           type: 'text',
+          required: true,
         },
       ],
     },

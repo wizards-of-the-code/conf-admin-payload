@@ -21,11 +21,13 @@ const Currencies: CollectionConfig = {
       name: 'name',
       label: 'Название',
       type: 'text',
+      required: true,
     },
     {
       name: 'sign',
       label: 'Знак',
       type: 'text',
+      required: true,
     },
   ]
 };

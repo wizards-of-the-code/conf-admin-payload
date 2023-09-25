@@ -19,11 +19,13 @@ const WBFooters: CollectionConfig = {
       name: 'title',
       label: 'Название',
       type: 'text',
+      required: true,
     },
     {
       name: 'message',
       label: 'Сообщение',
       type: 'textarea',
+      required: true,
     },
   ],
 };
