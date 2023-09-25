@@ -6,7 +6,7 @@ const CountrySelectComponent: FC<{ path: string }> = ({ path }) => {
     const [options, setOptions] = useState([]);
 
     const isoCountries = require('i18n-iso-countries');
-    isoCountries.registerLocale(require('i18n-iso-countries/langs/ru.json')); // Load Russian locale
+    isoCountries.registerLocale(require('i18n-iso-countries/langs/ru.json')); 
 
     useEffect(() => {
         const fetchCountries = async () => {
@@ -17,6 +17,10 @@ const CountrySelectComponent: FC<{ path: string }> = ({ path }) => {
                 }));
 
                 const countriesOptions = countriesList.map((item) => {
+                    if (item.label === 'Российская Федерация') {
+                        item.label = 'Россия'
+                    }
+                    
                     return {
                         label: `${item.label}`,
                         value: item.label,
