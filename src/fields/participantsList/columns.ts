@@ -11,6 +11,12 @@ export const COLUMNS = [
   {
     Header: 'Участвовал(а)'
   },
+  // {
+  //   Header: 'Валюта'
+  // },
+  // {
+  //   Header: 'Комментарий'
+  // },
   {
     Header: ''
   },

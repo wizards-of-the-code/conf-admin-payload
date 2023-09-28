@@ -4,12 +4,22 @@
   justify-content: space-between;
 }
 
+.table-wrapper {
+  overflow-x: auto;
+}
+
 .table {
   width: 100%;
 }
 
 .svg-icon-small {
   height: 20px;
+  min-width: 20px;
+}
+
+.svg-icon-medium {
+  height: 24px;
+  min-width: 24px;
 }
 
 .svg-link {
@@ -24,4 +34,13 @@
 table td.row-controls {
   min-width: unset;
   width: 100px;
+}
+
+.row-controls-cell {
+  display: none;
+
+  &.changed {
+    display: flex;
+    gap: 10px;
+  }
 }

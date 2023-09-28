@@ -17,16 +17,18 @@ function ParticipantsTable({ tableData, eventId }: Props) {
   });
   
   return (
-    <table className='table'>
-    <thead>
-        <tr>
+    <div className='table-wrapper'>
+      <table className='table'>
+      <thead>
+          <tr>
             {renderHeaders}
-        </tr>
-    </thead>
-    <tbody>
+          </tr>
+      </thead>
+      <tbody>
         {renderParticipants}
-    </tbody>
-    </table>
+      </tbody>
+      </table>
+    </div>
   )
 }
 

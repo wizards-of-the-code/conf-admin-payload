@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import TelegramSvg from '../../../assets/svgs/telegram_logo.svg';
+import SaveSvg from '../../../assets/svgs/save-fill.svg';
+import RevertSvg from '../../../assets/svgs/arrow-go-back-line.svg';
 import { toast } from 'react-toastify';
 
 type Props = {
@@ -9,8 +11,14 @@ type Props = {
 
 function ParticipantRow({participant, eventData}: Props) {
   const [currentData, setCurrentData] = useState(eventData);
+  const [changed, setChanged] = useState(false);
 
   // Functions
+  const handleRevert = () => {
+    setChanged(false);
+    setCurrentData(eventData);
+  }
+
   const handleRequest = (itemId, data) => {
     const postUpdate = async () => {
       try {
@@ -26,7 +34,11 @@ function ParticipantRow({participant, eventData}: Props) {
         const content = await response.json();
         
         if(response.ok) {
-          toast.info('Изменения сохранены');
+          setChanged(false);
+          toast.info('Изменения сохранены.');
+        } else {
+          handleRevert();
+          toast.error('Произошла ошибка при сохранении данных.')
         }
       } catch (error) {
         console.log('error', error);
@@ -37,6 +49,7 @@ function ParticipantRow({participant, eventData}: Props) {
   }
 
   const handlePaymentSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setChanged(true);
     setCurrentData({
       ...currentData,
       is_payed: e.target.checked,
@@ -44,6 +57,7 @@ function ParticipantRow({participant, eventData}: Props) {
   }
 
   const handleAttendanceSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setChanged(true);
     setCurrentData({
       ...currentData,
       attended: e.target.checked,
@@ -69,7 +83,6 @@ function ParticipantRow({participant, eventData}: Props) {
           <td>
             <input
               type="checkbox"
-              id={`${eventData.id}-${participant.id}`}
               checked={currentData.is_payed}
               onChange={handlePaymentSwitch}
           ></input>
@@ -77,13 +90,35 @@ function ParticipantRow({participant, eventData}: Props) {
           <td>
             <input
               type="checkbox" 
-              id={`${eventData.id}-${participant.id}`}
               checked={currentData.attended}
               onChange={handleAttendanceSwitch}
           ></input>
           </td>
-          <td className='row-controls'>
-            <button type="button" onClick={() => handleRequest(participant.id, currentData)}>Save</button>
+          {/* <td>
+            <input
+              type="text"
+          ></input>
+          </td>
+          <td>
+            <input
+              type="text"
+          ></input>
+          </td> */}
+          <td>
+            <div className={`row-controls-cell ${changed ? 'changed' : ''}`}>
+            <img
+              className='svg-icon-medium svg-link'
+              src={SaveSvg}
+              onClick={() => handleRequest(participant.id, currentData)}
+              alt="Copy bot link"
+            />
+            <img
+              className='svg-icon-medium svg-link'
+              src={RevertSvg}
+              onClick={() => handleRevert()}
+              alt="Copy bot link"
+            />
+            </div>
           </td>
       </tr>             
   )
