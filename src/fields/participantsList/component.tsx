@@ -2,8 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { useDocumentInfo } from 'payload/components/utilities';
 import "./index.scss";
 import FilterBar from '../../components/FilterBar';
-import { COLUMNS } from './columns';
-import TelegramSvg from '../../assets/svgs/telegram_logo.svg';
+import ParticipantsTable from './components/ParticipantsTable';
 
 const ParticipantsListComponent: FC<{ path: string }> = ({ path }) => {
     const { id } = useDocumentInfo();
@@ -40,57 +39,11 @@ const ParticipantsListComponent: FC<{ path: string }> = ({ path }) => {
 			}
 		}, [searchQ])
 
-		// Renders
-    const renderHeaders = COLUMNS.map((item, index) => <th key={index}>{item.Header}</th>);
-
-    const renderParticipants = filtered.map((item) => {
-        const eventData = item.events.find((event) => event.event_id === id);
-
-        return (
-            <tr className='participant-row' key={item.id}>
-                <td>
-									<div className='name-field'>
-										<a href={`https://t.me/${item.tg.username}`} target='_blank'>
-											<img
-											className='svg-icon-small svg-link'
-											src={TelegramSvg} 
-											alt="Copy bot link" />
-										</a>
-									{item.username}
-									</div>
-								</td>
-                <td>{eventData.role}</td>
-                <td><input
-                    type="checkbox"
-                    id={`${eventData.id}-${item.id}`}
-                    name="vehicle1"
-                    value={eventData.is_payed}
-                ></input></td>
-                <td><input
-                    type="checkbox" 
-                    id={`${eventData.id}-${item.id}`}
-                    name="vehicle1"
-                    value={eventData.attended}
-                ></input></td>
-            </tr>             
-        )
-    });
-
     return (
         <div>
             <h3>Участники</h3>
             <FilterBar filter={searchQ} setFilter={setSearchQ} />
-            <table className='table'>
-            <thead>
-                <tr>
-                    {renderHeaders}
-                </tr>
-            </thead>
-            <tbody>
-                {renderParticipants}
-            </tbody>
-            </table>
-            
+						<ParticipantsTable tableData={filtered} eventId={id} />
         </div>
     )
 }

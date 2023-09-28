@@ -6,9 +6,42 @@ dotenv.config();
 
 const app = express();
 
+app.use(express.json());
+
 // Redirect root to Admin panel
 app.get('/', (_, res) => {
   res.redirect('/admin');
+});
+
+app.put('/api/custom/participants/:id', async (req, res) => {
+  //console.log('request body', req.body);
+  // console.log('id', req.params.id);
+
+  const participant = await payload.findByID({
+    collection: 'participants',
+    id: req.params.id,
+    depth: 0,
+  });
+
+  if(participant.events.length > 0) {
+    participant.events.map((event) => {
+      if(event.event_id === req.body.event_id) {
+        event.is_payed = req.body.is_payed;
+        event.attended = req.body.attended;
+      }
+      return event;
+    })
+  }
+
+  const result = await payload.update({
+    collection: 'participants',
+    id: req.params.id,
+    data: participant,
+  });
+
+  console.log(result);
+
+  res.send(JSON.stringify('Request received'));
 });
 
 const start = async () => {

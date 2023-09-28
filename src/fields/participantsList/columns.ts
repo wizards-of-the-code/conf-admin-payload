@@ -1,18 +1,17 @@
 export const COLUMNS = [
   {
-    Header: 'Имя',
-    accessor: 'name'
+    Header: 'Имя'
   },
   {
-    Header: 'Роль',
-    accessor: 'role'
+    Header: 'Роль'
   },
   {
-    Header: 'Оплачено',
-    accessor: 'is_payed'
+    Header: 'Оплачено'
   },
   {
-    Header: 'Участвовал(а)',
-    accessor: 'attended'
-  }
+    Header: 'Участвовал(а)'
+  },
+  {
+    Header: ''
+  },
 ];
