@@ -5,6 +5,7 @@ import { CollectionConfig, FieldHook } from 'payload/types';
 import CurrencySelectField from '../fields/currencySelector/field';
 import CountrySelectorField from '../fields/countrySelector/field';
 import EventLinkField from '../fields/eventLink/field';
+import ParticipantsListField from '../fields/participantsList/field';
 
 const Events: CollectionConfig = {
   slug: 'events',
@@ -234,6 +235,7 @@ const Events: CollectionConfig = {
         readOnly: true,
       }
     },
+    ParticipantsListField,
   ]
 };
 
