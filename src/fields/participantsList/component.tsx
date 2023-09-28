@@ -1,11 +1,17 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useDocumentInfo } from 'payload/components/utilities';
 import "./index.scss";
+import FilterBar from '../../components/FilterBar';
+import { COLUMNS } from './columns';
 
 const ParticipantsListComponent: FC<{ path: string }> = ({ path }) => {
     const { id } = useDocumentInfo();
     const [participants, setParticipants] = useState([]);
+    const [filtered, setFiltered] = useState([]);
 
+    const [searchQ, setSearchQ] = useState('');
+
+    // Side effects
     useEffect(() => {
         const fetchParticipants = async () => {
             try {
@@ -14,6 +20,7 @@ const ParticipantsListComponent: FC<{ path: string }> = ({ path }) => {
 
                 if (data.participants) {
                     setParticipants(data.participants);
+										setFiltered(data.participants);
                 }
             } catch (error) {
                 console.log('error');
@@ -23,23 +30,57 @@ const ParticipantsListComponent: FC<{ path: string }> = ({ path }) => {
         fetchParticipants();
     }, []);
 
-    const renderParticipants = participants.map((item) => {
+		useEffect(() => {
+			if(participants.length > 0) {
+				if(searchQ !== '') {
+					setFiltered(participants.filter((participant) => participant.username.toLowerCase().includes(searchQ.toLowerCase())));
+				} else {
+					setFiltered(participants);
+				}
+			}
+		}, [searchQ])
+
+		// Renders
+    const renderHeaders = COLUMNS.map((item, index) => <th>{item.Header}</th>);
+
+    const renderParticipants = filtered.map((item) => {
         const eventData = item.events.find((event) => event.event_id === id);
 
         return (
-            <div className='participants-wrapper' key={item.id}>
-                <span>{item.username}</span>
-                <span>{eventData.role}</span>
-                <input type="checkbox" id={`${eventData.id}-${item.id}`} name="vehicle1" value={eventData.is_payed}></input>
-                <input type="checkbox" id={`${eventData.id}-${item.id}`} name="vehicle1" value={eventData.attended}></input>
-            </div>
+            <tr className='participant-row' key={item.id}>
+                <td>{item.username}</td>
+                <td>{eventData.role}</td>
+                <td><input
+                    type="checkbox"
+                    id={`${eventData.id}-${item.id}`}
+                    name="vehicle1"
+                    value={eventData.is_payed}
+                ></input></td>
+                <td><input
+                    type="checkbox" 
+                    id={`${eventData.id}-${item.id}`}
+                    name="vehicle1"
+                    value={eventData.attended}
+                ></input></td>
+            </tr>             
         )
     });
 
     return (
         <div>
             <h3>Участники</h3>
-            {renderParticipants}
+            <FilterBar filter={searchQ} setFilter={setSearchQ} />
+            <table className='table'>
+            <thead>
+                <tr>
+                    {renderHeaders}
+                </tr>
+            </thead>
+            <tbody>
+                {renderParticipants}
+            </tbody>
+            </table>
+            
         </div>
     )
 }
