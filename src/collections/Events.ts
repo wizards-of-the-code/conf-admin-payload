@@ -233,6 +233,7 @@ const Events: CollectionConfig = {
       admin: {
         allowCreate: false,
         readOnly: true,
+        condition: () => false,
       }
     },
     ParticipantsListField,
