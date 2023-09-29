@@ -31,8 +31,7 @@ function ParticipantRow({participant, eventData}: Props) {
           },
           body: JSON.stringify(data)
         });
-        const content = await response.json();
-        
+
         if(response.ok) {
           setChanged(false);
           toast.info('Изменения сохранены.');
