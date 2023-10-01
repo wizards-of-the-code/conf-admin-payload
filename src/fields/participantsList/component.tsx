@@ -3,6 +3,7 @@ import { useDocumentInfo } from 'payload/components/utilities';
 import "./index.scss";
 import FilterBar from '../../components/FilterBar';
 import ParticipantsTable from './components/ParticipantsTable';
+import ParticipantCard from './components/ParticipantCard';
 
 const ParticipantsListComponent: FC<{ path: string }> = ({ path }) => {
 	const { id } = useDocumentInfo();
@@ -40,11 +41,14 @@ const ParticipantsListComponent: FC<{ path: string }> = ({ path }) => {
 	}, [searchQ])
 
 	return (
-			<div>
-					<h3>Участники</h3>
-					<FilterBar filter={searchQ} setFilter={setSearchQ} />
-					<ParticipantsTable tableData={filtered} eventId={id} />
+		<div>
+			<h3>Участники</h3>
+			<FilterBar filter={searchQ} setFilter={setSearchQ} />
+			{/* <ParticipantsTable tableData={filtered} eventId={id} /> */}
+			<div className='participants-wrapper'>
+				{ filtered.map((item) => <ParticipantCard key={item.id} participant={item} />) }
 			</div>
+		</div>
 	)
 }
 

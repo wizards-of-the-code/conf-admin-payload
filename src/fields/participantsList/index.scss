@@ -29,6 +29,7 @@
 .name-field {
   display: flex;
   gap: 10px;
+  width: 50px;
 }
 
 table td.row-controls {
@@ -42,5 +43,52 @@ table td.row-controls {
   &.changed {
     display: flex;
     gap: 10px;
+  }
+}
+
+.participants-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 1em;
+}
+
+.participant-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: var(--theme-input-bg);
+  padding: 1em;
+}
+
+.pc-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .pc-header-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.pc-body {
+  &.hidden {
+    display: none;
+  }
+}
+
+.action-button {
+  border-radius: 50%;
+  border: 0;
+  padding: 3px;
+  background-color: var(--theme-border-color);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: var(--theme-elevation-500);
   }
 }
