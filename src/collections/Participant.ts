@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import formatDateToDdMmYyyy from '../utils/dateFormat';
 import ContactUserButtonField from '../fields/contactButton/field';
 import getUsername from '../hooks/getUsername';
+import PaymentMethodSelectComponent from '../fields/paymentMethodSelector/component';
 
 const Participants: CollectionConfig = {
   slug: 'participants',
@@ -105,6 +106,16 @@ const Participants: CollectionConfig = {
             }
           },
         },
+        {
+          name: 'payment_method',
+          label: 'Способ оплаты',
+          type: 'text',
+          admin: {
+            components: {
+              Field: PaymentMethodSelectComponent,
+            }
+          }
+        }
       ],
       admin: {
         initCollapsed: true,

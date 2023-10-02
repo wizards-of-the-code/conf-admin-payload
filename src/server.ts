@@ -31,11 +31,11 @@ app.put('/api/custom/participants/:id', async (req, res) => {
         event.description = req.body.description;
         event.sum = req.body.sum;
         event.payment_date = req.body.payment_date;
+        event.payment_method = req.body.payment_method;
       }
       return event;
     })
   }
-  console.log('participant', participant);
   
   const result = await payload.update({
     collection: 'participants',

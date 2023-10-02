@@ -4,16 +4,21 @@ import ChevronUp from '../../../assets/svgs/chevron-up.svg';
 import ChevronDown from '../../../assets/svgs/chevron-down.svg';
 import { toast } from 'react-toastify';
 import Date from "payload/dist/admin/components/elements/DatePicker";
+import SelectInput from 'payload/dist/admin/components/elements/ReactSelect';
 
 type Props = {
   participant: any,
   eventData: any,
+  paymentOptions: any,
 }
 
-function ParticipantCard({participant, eventData}: Props) {
+function ParticipantCard({participant, eventData, paymentOptions}: Props) {
   const [currentData, setCurrentData] = useState(eventData);
   const [collapsed, setCollapsed] = useState(true);
   const [changed, setChanged] = useState(false);
+
+  console.log(currentData.payment_method);
+  console.log(paymentOptions);
 
   // Functions
   const handleCollapse = (e: React.SyntheticEvent) => {
@@ -39,6 +44,14 @@ function ParticipantCard({participant, eventData}: Props) {
     setCurrentData({
       ...currentData,
       [e.target.name]: e.target.value,
+    });
+  }
+
+  const handlePaymentChange = (e: any) => {
+    setChanged(true);
+    setCurrentData({
+      ...currentData,
+      payment_method: e.value,
     });
   }
 
@@ -77,6 +90,8 @@ function ParticipantCard({participant, eventData}: Props) {
     
     postUpdate();
   }
+
+  const getSelectedOption = paymentOptions.find((option) => option.value === currentData.payment_method);
 
   // Renders
   const renderChevron = collapsed ?
@@ -135,9 +150,13 @@ function ParticipantCard({participant, eventData}: Props) {
             onChange={handleTextChange}
             value={currentData.sum} />
           </div>
-          <div className='field-type text'>
+          <div className='field-type select'>
             <label>Способ оплаты</label>
-            <input type="text" name='currency'></input>
+            <SelectInput
+              options={paymentOptions}
+              value={getSelectedOption}
+              onChange={handlePaymentChange}
+      />
           </div>
           <div className='field-type text'>
             <label>Дата</label>
