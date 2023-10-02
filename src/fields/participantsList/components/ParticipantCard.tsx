@@ -48,7 +48,36 @@ function ParticipantCard({participant, eventData = {}}: Props) {
         </div>
       </div>
       <div className={`pc-body ${collapsed ? 'hidden' : ''}`}>
-        Body here
+        <div className="render-fields field-type row">
+          <div className='field-type text'>
+            <label htmlFor={`sum-${participant.username}`}>Сумма</label>
+            <input type="text" name={`sum-${participant.username}`}></input>
+          </div>
+          <div className='field-type text'>
+            <label htmlFor={`currency-${participant.username}`}>Валюта</label>
+            <input type="text" name={`currency-${participant.username}`}></input>
+          </div>
+          <div className='field-type text'>
+            <label htmlFor={`date-${participant.username}`}>Дата</label>
+            <input type="text" name={`date-${participant.username}`}></input>
+          </div>
+        </div>
+        <div className="render-fields field-type row">
+          <div className='field-type text'>
+            <label htmlFor={`description-${participant.username}`}>Примечание</label>
+            <input type="text" name={`description-${participant.username}`}></input>
+          </div>
+        </div>
+        <div className="render-fields field-type row">
+          <div>
+            <label className="field-label" htmlFor={`paid-${participant.username}`}>Оплачено</label>
+            <input type='checkbox' name={`paid-${participant.username}`} />
+          </div>
+          <div>
+            <label className="field-label" htmlFor={`participated-${participant.username}`}>Участвовал(а)</label>
+            <input type='checkbox' name={`participated-${participant.username}`} />
+          </div>
+        </div>
       </div>
     </div>
   )

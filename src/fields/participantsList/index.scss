@@ -57,9 +57,7 @@ table td.row-controls {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
   background-color: var(--theme-input-bg);
-  padding: 1em;
 }
 
 .pc-header {
@@ -67,6 +65,7 @@ table td.row-controls {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: 1em;
 
   .pc-header-controls {
     display: flex;
@@ -76,6 +75,11 @@ table td.row-controls {
 }
 
 .pc-body {
+  padding: 1em;
+  background-color: var(--theme-bg);
+  border: 1px solid var(--theme-input-bg);
+  border-top: 0;
+
   &.hidden {
     display: none;
   }
