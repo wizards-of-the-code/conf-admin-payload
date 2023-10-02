@@ -85,6 +85,16 @@ const Participants: CollectionConfig = {
           type: 'checkbox',
           required: true,
         },
+        {
+          name: 'sum',
+          label: 'Оплаченная сумма',
+          type: 'text',
+        },
+        {
+          name: 'description',
+          label: 'Комментарий',
+          type: 'text',
+        },
       ],
       admin: {
         initCollapsed: true,

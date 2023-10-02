@@ -11,13 +11,14 @@ type ParticipantEventData = {
   role: 'participant' | 'organizer' | 'speaker' | 'volunteer';
   is_payed: boolean;
   attended: boolean;
+  description: string;
 }
 
 function ParticipantsList({items, eventId}: Props) {
 
   // Renders
   const renderParticipants = items.map((item) => { 
-    const eventData = item.events.find((event: ParticipantEventData) => event.event_id === eventId);
+    const eventData: ParticipantEventData = item.events.find((event: ParticipantEventData) => event.event_id === eventId);
 
     return <ParticipantCard key={item.id} participant={item} eventData={eventData} />;
   });

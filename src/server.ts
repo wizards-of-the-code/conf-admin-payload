@@ -28,18 +28,19 @@ app.put('/api/custom/participants/:id', async (req, res) => {
       if(event.event_id === req.body.event_id) {
         event.is_payed = req.body.is_payed;
         event.attended = req.body.attended;
+        event.description = req.body.description;
+        event.sum = req.body.sum;
       }
       return event;
     })
   }
-
+  console.log('participant', participant);
+  
   const result = await payload.update({
     collection: 'participants',
     id: req.params.id,
     data: participant,
   });
-
-  console.log(result);
 
   res.send(JSON.stringify('Request received'));
 });

@@ -41,6 +41,22 @@ function ParticipantCard({participant, eventData}: Props) {
     });
   }
 
+  const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setChanged(true);
+    setCurrentData({
+      ...currentData,
+      description: e.target.value,
+    });
+  }
+
+  const handleSumChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setChanged(true);
+    setCurrentData({
+      ...currentData,
+      sum: e.target.value,
+    });
+  }
+
   const handleRequest = (itemId, data) => {
     const postUpdate = async () => {
       try {
@@ -120,7 +136,11 @@ function ParticipantCard({participant, eventData}: Props) {
         <div className="render-fields field-type row">
           <div className='field-type text'>
             <label htmlFor={`sum-${participant.username}`}>Сумма</label>
-            <input type="text" name={`sum-${participant.username}`}></input>
+            <input
+            type="text"
+            name={`sum-${participant.username}`}
+            onChange={handleSumChange}
+            value={currentData.sum} />
           </div>
           <div className='field-type text'>
             <label htmlFor={`currency-${participant.username}`}>Валюта</label>
@@ -134,7 +154,11 @@ function ParticipantCard({participant, eventData}: Props) {
         <div className="render-fields field-type row">
           <div className='field-type text'>
             <label htmlFor={`description-${participant.username}`}>Примечание</label>
-            <input type="text" name={`description-${participant.username}`}></input>
+            <input
+              type="text"
+              name={`description-${participant.username}`}
+              onChange={handleDescriptionChange}
+              value={currentData.description} />
           </div>
         </div>
         <div className="render-fields field-type row">
