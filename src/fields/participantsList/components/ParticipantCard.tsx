@@ -29,7 +29,7 @@ function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
     setCurrentData(eventData);
   };
 
-  const handlCheckboxSwitch = (e: any, name: string) => {
+  const handleCheckboxSwitch = (e: any, name: string) => {
     setChanged(true);
     setCurrentData({
       ...currentData,
@@ -187,13 +187,13 @@ function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
             name="is_payed"
             label="Оплачено"
             defaultChecked={eventData.is_payed}
-            onChange={(e) => handlCheckboxSwitch(e, 'is_payed')}
+            onChange={(e) => handleCheckboxSwitch(e, 'is_payed')}
           />
           <CustomCheckbox
             name="attended"
             label="Участвовал(а)"
             defaultChecked={eventData.attended}
-            onChange={(e) => handlCheckboxSwitch(e, 'attended')}
+            onChange={(e) => handleCheckboxSwitch(e, 'attended')}
           />
         </div>
         <div className={`controls-row ${changed ? 'changed' : ''}`}>
