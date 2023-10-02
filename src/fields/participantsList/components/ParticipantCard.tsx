@@ -16,14 +16,33 @@ type ParticipantEventData = {
 }
 
 function ParticipantCard({participant, eventId}: Props) {
-  const eventData: ParticipantEventData | null = participant.events.find((event: ParticipantEventData) => event.event_id === eventId);
-
+  const [currentData, setCurrentData] = useState(
+    participant.events.find((event: ParticipantEventData) => event.event_id === eventId)
+  );
   const [collapsed, setCollapsed] = useState(true);
+  const [changed, setChanged] = useState(false);
+  const [paid, setPaid] = useState(currentData.is_payed);
 
   // Functions
   const handleCollapse = (e: React.SyntheticEvent) => {
     e.preventDefault();
     setCollapsed(prev => !prev);
+  }
+
+  const handlePaymentSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setChanged(true);
+    setCurrentData({
+      ...currentData,
+      is_payed: e.target.checked,
+    });
+  }
+
+  const handleAttendanceSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setChanged(true);
+    setCurrentData({
+      ...currentData,
+      attended: e.target.checked,
+    });
   }
 
   // Renders
@@ -36,7 +55,7 @@ function ParticipantCard({participant, eventId}: Props) {
       src={ChevronUp} />;
 
   const renderRole = () => {
-    switch (eventData.role) {
+    switch (currentData.role) {
       case('organizer'):
         return 'Организатор';
       case('speaker'):
@@ -49,7 +68,7 @@ function ParticipantCard({participant, eventId}: Props) {
     }
   }
 
-  const renderPaid = eventData.is_payed ?
+  const renderPaid = currentData.is_payed ?
     <div className='span-green'>Оплачено</div> :
     <div className='span-red'>Не оплачено</div>;
 
@@ -97,11 +116,19 @@ function ParticipantCard({participant, eventId}: Props) {
         <div className="render-fields field-type row">
           <div>
             <label className="field-label" htmlFor={`paid-${participant.username}`}>Оплачено</label>
-            <input type='checkbox' name={`paid-${participant.username}`} />
+            <input 
+              type='checkbox' 
+              name={`paid-${participant.username}`} 
+              checked={currentData.is_payed}
+              onChange={handlePaymentSwitch}/>
           </div>
           <div>
             <label className="field-label" htmlFor={`participated-${participant.username}`}>Участвовал(а)</label>
-            <input type='checkbox' name={`participated-${participant.username}`} />
+            <input
+              type='checkbox'
+              name={`participated-${participant.username}`}
+              checked={currentData.attended}
+              onChange={handleAttendanceSwitch} />
           </div>
         </div>
       </div>
