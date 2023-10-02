@@ -5,12 +5,18 @@ import ChevronDown from '../../../assets/svgs/chevron-down.svg';
 
 type Props = {
   participant: any,
-  eventData?: any,
+  eventId: number | string,
 }
 
-function ParticipantCard({participant, eventData = {}}: Props) {
+type ParticipantEventData = {
+  event_id: string | number;
+  role: 'participant' | 'organizer' | 'speaker' | 'volunteer';
+  is_payed: boolean;
+  attended: boolean;
+}
 
-  console.log(eventData);
+function ParticipantCard({participant, eventId}: Props) {
+  const eventData: ParticipantEventData | null = participant.events.find((event: ParticipantEventData) => event.event_id === eventId);
 
   const [collapsed, setCollapsed] = useState(true);
 
@@ -29,6 +35,24 @@ function ParticipantCard({participant, eventData = {}}: Props) {
       className='svg-icon-small svg-link'
       src={ChevronUp} />;
 
+  const renderRole = () => {
+    switch (eventData.role) {
+      case('organizer'):
+        return 'Организатор';
+      case('speaker'):
+        return 'Спикер';
+      case('volunteer'):
+        return 'Волонтёр';
+      case('participant'):
+      default:
+        return 'Участник';
+    }
+  }
+
+  const renderPaid = eventData.is_payed ?
+    <div className='span-green'>Оплачено</div> :
+    <div className='span-red'>Не оплачено</div>;
+
   return (
     <div className='participant-card'>
       <div className='pc-header'>
@@ -41,8 +65,10 @@ function ParticipantCard({participant, eventData = {}}: Props) {
           </a>
         {participant.username}
         </div>
-        <span>Role</span>
-        <span>Не оплачено</span>
+        <div className="role-field">
+          {renderRole()}  
+        </div>
+        {renderPaid}
         <div className="pc-header-controls">
           <button className='action-button' type='button' onClick={handleCollapse}>{renderChevron}</button>
         </div>

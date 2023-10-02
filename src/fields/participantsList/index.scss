@@ -26,12 +26,6 @@
   cursor: pointer;
 }
 
-.name-field {
-  display: flex;
-  gap: 10px;
-  width: 50px;
-}
-
 table td.row-controls {
   min-width: unset;
   width: 100px;
@@ -63,14 +57,25 @@ table td.row-controls {
 .pc-header {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: 1em;
+
+  .name-field {
+    display: flex;
+    gap: 10px;
+    width: 150px;
+  }
+
+  .role-field {
+    width: 100px;
+  }
 
   .pc-header-controls {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    flex-grow: 1;
   }
 }
 
@@ -95,4 +100,12 @@ table td.row-controls {
   &:hover {
     background-color: var(--theme-elevation-500);
   }
+}
+
+.span-green {
+  color: var(--color-success-500);
+}
+
+.span-red {
+  color: var(--color-error-500);
 }

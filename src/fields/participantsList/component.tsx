@@ -46,7 +46,7 @@ const ParticipantsListComponent: FC<{ path: string }> = ({ path }) => {
 			<FilterBar filter={searchQ} setFilter={setSearchQ} />
 			{/* <ParticipantsTable tableData={filtered} eventId={id} /> */}
 			<div className='participants-wrapper'>
-				{ filtered.map((item) => <ParticipantCard key={item.id} participant={item} />) }
+				{ filtered.map((item) => <ParticipantCard key={item.id} participant={item} eventId={id} />) }
 			</div>
 		</div>
 	)
