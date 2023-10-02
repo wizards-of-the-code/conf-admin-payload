@@ -14,6 +14,7 @@ import { Logo } from './components/Logo';
 import WBFooters from './collections/WBFooters';
 import WBChats from './collections/WBChats';
 import CollapsibleNav from './components/CollapsibleNav';
+import PaymentMethods from './collections/PaymentMethods';
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -42,6 +43,7 @@ export default buildConfig({
     Users,
     Messages,
     Currencies,
+    PaymentMethods,
     Notifications,
     Logs,
     Media,

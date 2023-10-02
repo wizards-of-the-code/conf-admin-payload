@@ -136,7 +136,7 @@ function ParticipantCard({participant, eventData}: Props) {
             value={currentData.sum} />
           </div>
           <div className='field-type text'>
-            <label>Валюта</label>
+            <label>Способ оплаты</label>
             <input type="text" name='currency'></input>
           </div>
           <div className='field-type text'>
