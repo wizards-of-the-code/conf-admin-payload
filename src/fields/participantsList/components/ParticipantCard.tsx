@@ -3,41 +3,39 @@ import TelegramSvg from '../../../assets/svgs/telegram_logo.svg';
 import ChevronUp from '../../../assets/svgs/chevron-up.svg';
 import ChevronDown from '../../../assets/svgs/chevron-down.svg';
 import { toast } from 'react-toastify';
-import Date from "payload/dist/admin/components/elements/DatePicker";
+import Date from 'payload/dist/admin/components/elements/DatePicker';
 import SelectInput from 'payload/dist/admin/components/elements/ReactSelect';
+import CustomCheckbox from '../../../components/CustomCheckbox';
 
 type Props = {
-  participant: any,
-  eventData: any,
-  paymentOptions: any,
-}
+  participant: any;
+  eventData: any;
+  paymentOptions: any;
+};
 
-function ParticipantCard({participant, eventData, paymentOptions}: Props) {
+function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
   const [currentData, setCurrentData] = useState(eventData);
   const [collapsed, setCollapsed] = useState(true);
   const [changed, setChanged] = useState(false);
 
-  console.log(currentData.payment_method);
-  console.log(paymentOptions);
-
   // Functions
   const handleCollapse = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    setCollapsed(prev => !prev);
-  }
+    setCollapsed((prev) => !prev);
+  };
 
   const handleRevert = () => {
     setChanged(false);
     setCurrentData(eventData);
-  }
+  };
 
-  const handlCheckboxSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlCheckboxSwitch = (e: any, name: string) => {
     setChanged(true);
     setCurrentData({
       ...currentData,
-      [e.target.name]: e.target.checked,
+      [name]: e,
     });
-  }
+  };
 
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChanged(true);
@@ -45,7 +43,7 @@ function ParticipantCard({participant, eventData, paymentOptions}: Props) {
       ...currentData,
       [e.target.name]: e.target.value,
     });
-  }
+  };
 
   const handlePaymentChange = (e: any) => {
     setChanged(true);
@@ -53,7 +51,7 @@ function ParticipantCard({participant, eventData, paymentOptions}: Props) {
       ...currentData,
       payment_method: e.value,
     });
-  }
+  };
 
   const handleDateChange = (value: Date) => {
     setChanged(true);
@@ -61,151 +59,162 @@ function ParticipantCard({participant, eventData, paymentOptions}: Props) {
       ...currentData,
       payment_date: value,
     });
-  }
+  };
 
   const handleRequest = (itemId, data) => {
     const postUpdate = async () => {
       try {
-        const response = await fetch(`http://${process.env.PAYLOAD_PUBLIC_CMS_URL}:${process.env.PAYLOAD_PUBLIC_NGINX_PORT}/api/custom/participants/${itemId}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        });
+        const response = await fetch(
+          `http://${process.env.PAYLOAD_PUBLIC_CMS_URL}:${process.env.PAYLOAD_PUBLIC_NGINX_PORT}/api/custom/participants/${itemId}`,
+          {
+            method: 'PUT',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          }
+        );
 
-        if(response.ok) {
+        if (response.ok) {
           setChanged(false);
           toast.success('Изменения сохранены.');
         } else {
           handleRevert();
-          toast.error('Произошла ошибка при сохранении данных.')
+          toast.error('Произошла ошибка при сохранении данных.');
         }
       } catch (error) {
         console.log('error', error);
       }
-    }
-    
-    postUpdate();
-  }
+    };
 
-  const getSelectedOption = paymentOptions.find((option) => option.value === currentData.payment_method);
+    postUpdate();
+  };
+
+  const getSelectedOption = paymentOptions.find(
+    (option) => option.value === currentData.payment_method
+  );
 
   // Renders
-  const renderChevron = collapsed ?
-    <img
-      className='svg-icon-small svg-link'
-      src={ChevronDown} /> :
-    <img
-      className='svg-icon-small svg-link'
-      src={ChevronUp} />;
+  const renderChevron = collapsed ? (
+    <img className="svg-icon-small svg-link" src={ChevronDown} />
+  ) : (
+    <img className="svg-icon-small svg-link" src={ChevronUp} />
+  );
 
   const renderRole = () => {
     switch (currentData.role) {
-      case('organizer'):
+      case 'organizer':
         return 'Организатор';
-      case('speaker'):
+      case 'speaker':
         return 'Спикер';
-      case('volunteer'):
+      case 'volunteer':
         return 'Волонтёр';
-      case('participant'):
+      case 'participant':
       default:
         return 'Участник';
     }
-  }
+  };
 
-  const renderPaid = currentData.is_payed ?
-    <div className='span-green'>Оплачено</div> :
-    <div className='span-red'>Не оплачено</div>;
+  const renderPaid = currentData.is_payed ? (
+    <div className="span-green">Оплачено</div>
+  ) : (
+    <div className="span-red">Не оплачено</div>
+  );
 
   return (
-    <div className='participant-card'>
-      <div className='pc-header'>
-        <div className='name-field'>
-          <a href={`https://t.me/${participant.tg.username}`} target='_blank'>
+    <div className="participant-card">
+      <div className="pc-header">
+        <div className="name-field">
+          <a href={`https://t.me/${participant.tg.username}`} target="_blank">
             <img
-            className='svg-icon-small svg-link'
-            src={TelegramSvg} 
-            alt="Copy bot link" />
+              className="svg-icon-small svg-link"
+              src={TelegramSvg}
+              alt="Copy bot link"
+            />
           </a>
-        {participant.username}
+          {participant.username}
         </div>
-        <div className="role-field">
-          {renderRole()}  
-        </div>
+        <div className="role-field">{renderRole()}</div>
         {renderPaid}
         <div className="pc-header-controls">
-          <button className='btn-action' type='button' onClick={handleCollapse}>{renderChevron}</button>
+          <button className="btn-action" type="button" onClick={handleCollapse}>
+            {renderChevron}
+          </button>
         </div>
       </div>
       <div className={`pc-body ${collapsed ? 'hidden' : ''}`}>
         <div className="render-fields field-type row">
-          <div className='field-type text'>
+          <div className="field-type text">
             <label>Сумма</label>
             <input
-            type='text'
-            name='sum'
-            onChange={handleTextChange}
-            value={currentData.sum} />
+              type="text"
+              name="sum"
+              onChange={handleTextChange}
+              value={currentData.sum}
+            />
           </div>
-          <div className='field-type select'>
+          <div className="field-type select">
             <label>Способ оплаты</label>
             <SelectInput
               options={paymentOptions}
               value={getSelectedOption}
               onChange={handlePaymentChange}
-      />
+            />
           </div>
-          <div className='field-type text'>
+          <div className="field-type text">
             <label>Дата</label>
-            <Date value={currentData.payment_date} onChange={handleDateChange} displayFormat='dd.MM.yyyy' />
+            <Date
+              value={currentData.payment_date}
+              onChange={handleDateChange}
+              displayFormat="dd.MM.yyyy"
+            />
           </div>
         </div>
         <div className="render-fields field-type row">
-          <div className='field-type text'>
+          <div className="field-type text">
             <label>Примечание</label>
             <input
-              type='text'
-              name='description'
+              type="text"
+              name="description"
               onChange={handleTextChange}
-              value={currentData.description} />
+              value={currentData.description}
+            />
           </div>
         </div>
         <div className="render-fields field-type row">
-          <div>
-            <label className="field-label">Оплачено</label>
-            <input 
-              type='checkbox' 
-              name='is_payed'
-              checked={currentData.is_payed}
-              onChange={handlCheckboxSwitch}/>
-          </div>
-          <div>
-            <label className="field-label" htmlFor={`participated-${participant.username}`}>Участвовал(а)</label>
-            <input
-              type='checkbox'
-              name='attended'
-              checked={currentData.attended}
-              onChange={handlCheckboxSwitch} />
-          </div>
+          <CustomCheckbox
+            name="is_payed"
+            label="Оплачено"
+            defaultChecked={eventData.is_payed}
+            onChange={(e) => handlCheckboxSwitch(e, 'is_payed')}
+          />
+          <CustomCheckbox
+            name="attended"
+            label="Участвовал(а)"
+            defaultChecked={eventData.attended}
+            onChange={(e) => handlCheckboxSwitch(e, 'attended')}
+          />
         </div>
         <div className={`controls-row ${changed ? 'changed' : ''}`}>
-          <button className='btn btn-compact btn--style-secondary btn--icon-style-without-border btn--size-small btn--icon-position-right'
-            type='button'
-            onClick={() => handleRevert()}>
+          <button
+            className="btn btn-compact btn--style-secondary btn--icon-style-without-border btn--size-small btn--icon-position-right"
+            type="button"
+            onClick={() => handleRevert()}
+          >
             Отменить изменения
           </button>
-          <button className='btn btn-compact btn--style-primary btn--icon-style-without-border btn--size-small btn--icon-position-right'
-            type='button'
-            onClick={() => handleRequest(participant.id, currentData)}>
+          <button
+            className="btn btn-compact btn--style-primary btn--icon-style-without-border btn--size-small btn--icon-position-right"
+            type="button"
+            onClick={() => handleRequest(participant.id, currentData)}
+          >
             Сохранить
-            </button>
+          </button>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default ParticipantCard
+export default ParticipantCard;
