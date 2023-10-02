@@ -2,31 +2,27 @@ import React, { useState } from 'react';
 import TelegramSvg from '../../../assets/svgs/telegram_logo.svg';
 import ChevronUp from '../../../assets/svgs/chevron-up.svg';
 import ChevronDown from '../../../assets/svgs/chevron-down.svg';
+import { toast } from 'react-toastify';
 
 type Props = {
   participant: any,
-  eventId: number | string,
+  eventData: any,
 }
 
-type ParticipantEventData = {
-  event_id: string | number;
-  role: 'participant' | 'organizer' | 'speaker' | 'volunteer';
-  is_payed: boolean;
-  attended: boolean;
-}
-
-function ParticipantCard({participant, eventId}: Props) {
-  const [currentData, setCurrentData] = useState(
-    participant.events.find((event: ParticipantEventData) => event.event_id === eventId)
-  );
+function ParticipantCard({participant, eventData}: Props) {
+  const [currentData, setCurrentData] = useState(eventData);
   const [collapsed, setCollapsed] = useState(true);
   const [changed, setChanged] = useState(false);
-  const [paid, setPaid] = useState(currentData.is_payed);
 
   // Functions
   const handleCollapse = (e: React.SyntheticEvent) => {
     e.preventDefault();
     setCollapsed(prev => !prev);
+  }
+
+  const handleRevert = () => {
+    setChanged(false);
+    setCurrentData(eventData);
   }
 
   const handlePaymentSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,6 +39,34 @@ function ParticipantCard({participant, eventId}: Props) {
       ...currentData,
       attended: e.target.checked,
     });
+  }
+
+  const handleRequest = (itemId, data) => {
+    const postUpdate = async () => {
+      try {
+        const response = await fetch(`http://${process.env.PAYLOAD_PUBLIC_CMS_URL}:${process.env.PAYLOAD_PUBLIC_NGINX_PORT}/api/custom/participants/${itemId}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        if(response.ok) {
+          setChanged(false);
+          toast.success('Изменения сохранены.');
+        } else {
+          handleRevert();
+          toast.error('Произошла ошибка при сохранении данных.')
+        }
+      } catch (error) {
+        console.log('error', error);
+      }
+    }
+    
+    postUpdate();
   }
 
   // Renders
@@ -89,7 +113,7 @@ function ParticipantCard({participant, eventId}: Props) {
         </div>
         {renderPaid}
         <div className="pc-header-controls">
-          <button className='action-button' type='button' onClick={handleCollapse}>{renderChevron}</button>
+          <button className='btn-action' type='button' onClick={handleCollapse}>{renderChevron}</button>
         </div>
       </div>
       <div className={`pc-body ${collapsed ? 'hidden' : ''}`}>
@@ -130,6 +154,18 @@ function ParticipantCard({participant, eventId}: Props) {
               checked={currentData.attended}
               onChange={handleAttendanceSwitch} />
           </div>
+        </div>
+        <div className={`controls-row ${changed ? 'changed' : ''}`}>
+          <button className='btn btn-compact btn--style-secondary btn--icon-style-without-border btn--size-small btn--icon-position-right'
+            type='button'
+            onClick={() => handleRevert()}>
+            Отменить изменения
+          </button>
+          <button className='btn btn-compact btn--style-primary btn--icon-style-without-border btn--size-small btn--icon-position-right'
+            type='button'
+            onClick={() => handleRequest(participant.id, currentData)}>
+            Сохранить
+            </button>
         </div>
       </div>
     </div>

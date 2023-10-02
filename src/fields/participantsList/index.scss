@@ -31,12 +31,13 @@ table td.row-controls {
   width: 100px;
 }
 
-.row-controls-cell {
+.controls-row {
   display: none;
+  justify-content: flex-end;
+  gap: 10px;
 
   &.changed {
     display: flex;
-    gap: 10px;
   }
 }
 
@@ -90,15 +91,15 @@ table td.row-controls {
   }
 }
 
-.action-button {
+.btn-action {
   border-radius: 50%;
   border: 0;
   padding: 3px;
-  background-color: var(--theme-border-color);
   transition: all 0.3s ease-in-out;
+  background-color: var(--theme-input-bg);
 
   &:hover {
-    background-color: var(--theme-elevation-500);
+    background-color: var(--theme-elevation-200);
   }
 }
 
@@ -108,4 +109,12 @@ table td.row-controls {
 
 .span-red {
   color: var(--color-error-500);
+}
+
+.btn-save {
+  width: 100px;
+}
+
+.btn-cancel {
+  width: 100px;
 }
