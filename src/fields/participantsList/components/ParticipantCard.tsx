@@ -3,6 +3,7 @@ import TelegramSvg from '../../../assets/svgs/telegram_logo.svg';
 import ChevronUp from '../../../assets/svgs/chevron-up.svg';
 import ChevronDown from '../../../assets/svgs/chevron-down.svg';
 import { toast } from 'react-toastify';
+import Date from "payload/dist/admin/components/elements/DatePicker";
 
 type Props = {
   participant: any,
@@ -25,35 +26,27 @@ function ParticipantCard({participant, eventData}: Props) {
     setCurrentData(eventData);
   }
 
-  const handlePaymentSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlCheckboxSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChanged(true);
     setCurrentData({
       ...currentData,
-      is_payed: e.target.checked,
+      [e.target.name]: e.target.checked,
     });
   }
 
-  const handleAttendanceSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChanged(true);
     setCurrentData({
       ...currentData,
-      attended: e.target.checked,
+      [e.target.name]: e.target.value,
     });
   }
 
-  const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleDateChange = (value: Date) => {
     setChanged(true);
     setCurrentData({
       ...currentData,
-      description: e.target.value,
-    });
-  }
-
-  const handleSumChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setChanged(true);
-    setCurrentData({
-      ...currentData,
-      sum: e.target.value,
+      payment_date: value,
     });
   }
 
@@ -135,48 +128,48 @@ function ParticipantCard({participant, eventData}: Props) {
       <div className={`pc-body ${collapsed ? 'hidden' : ''}`}>
         <div className="render-fields field-type row">
           <div className='field-type text'>
-            <label htmlFor={`sum-${participant.username}`}>Сумма</label>
+            <label>Сумма</label>
             <input
-            type="text"
-            name={`sum-${participant.username}`}
-            onChange={handleSumChange}
+            type='text'
+            name='sum'
+            onChange={handleTextChange}
             value={currentData.sum} />
           </div>
           <div className='field-type text'>
-            <label htmlFor={`currency-${participant.username}`}>Валюта</label>
-            <input type="text" name={`currency-${participant.username}`}></input>
+            <label>Валюта</label>
+            <input type="text" name='currency'></input>
           </div>
           <div className='field-type text'>
-            <label htmlFor={`date-${participant.username}`}>Дата</label>
-            <input type="text" name={`date-${participant.username}`}></input>
+            <label>Дата</label>
+            <Date value={currentData.payment_date} onChange={handleDateChange} displayFormat='dd.MM.yyyy' />
           </div>
         </div>
         <div className="render-fields field-type row">
           <div className='field-type text'>
-            <label htmlFor={`description-${participant.username}`}>Примечание</label>
+            <label>Примечание</label>
             <input
-              type="text"
-              name={`description-${participant.username}`}
-              onChange={handleDescriptionChange}
+              type='text'
+              name='description'
+              onChange={handleTextChange}
               value={currentData.description} />
           </div>
         </div>
         <div className="render-fields field-type row">
           <div>
-            <label className="field-label" htmlFor={`paid-${participant.username}`}>Оплачено</label>
+            <label className="field-label">Оплачено</label>
             <input 
               type='checkbox' 
-              name={`paid-${participant.username}`} 
+              name='is_payed'
               checked={currentData.is_payed}
-              onChange={handlePaymentSwitch}/>
+              onChange={handlCheckboxSwitch}/>
           </div>
           <div>
             <label className="field-label" htmlFor={`participated-${participant.username}`}>Участвовал(а)</label>
             <input
               type='checkbox'
-              name={`participated-${participant.username}`}
+              name='attended'
               checked={currentData.attended}
-              onChange={handleAttendanceSwitch} />
+              onChange={handlCheckboxSwitch} />
           </div>
         </div>
         <div className={`controls-row ${changed ? 'changed' : ''}`}>

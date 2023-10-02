@@ -95,6 +95,16 @@ const Participants: CollectionConfig = {
           label: 'Комментарий',
           type: 'text',
         },
+        {
+          name: 'payment_date',
+          label: 'Дата платежа',
+          type: 'date',
+          admin: {
+            date: {
+              displayFormat: 'dd.MM.yyyy',
+            }
+          },
+        },
       ],
       admin: {
         initCollapsed: true,
