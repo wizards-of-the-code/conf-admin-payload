@@ -49,7 +49,6 @@ const ParticipantsListComponent: FC<{ path: string }> = ({ path }) => {
     <div>
       <h3>Участники</h3>
       <FilterBar filter={searchQ} setFilter={setSearchQ} />
-      {/* <ParticipantsTable tableData={filtered} eventId={id} /> */}
       <ParticipantsList items={filtered} eventId={id} />
     </div>
   );
