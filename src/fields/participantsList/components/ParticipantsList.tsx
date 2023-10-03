@@ -20,8 +20,6 @@ function ParticipantsList({ items, eventId }: Props) {
         );
         const data = await response.json();
 
-        console.log('data', data);
-
         const currencyOptions = data.docs.map((item: PaymentMethod) => {
           return {
             label: `${item.source} ( ${item.currency} )`,
@@ -45,6 +43,20 @@ function ParticipantsList({ items, eventId }: Props) {
     const eventData: ParticipantEventData = item.events.find(
       (event) => event.event_id === eventId
     );
+
+    // Fill potentially empty fields
+    if (!eventData.description) {
+      eventData.description = '';
+    }
+    if (!eventData.sum) {
+      eventData.sum = '';
+    }
+    if (!eventData.payment_date) {
+      eventData.payment_date = null;
+    }
+    if (!eventData.payment_method) {
+      eventData.payment_method = '';
+    }
 
     return (
       <ParticipantCard

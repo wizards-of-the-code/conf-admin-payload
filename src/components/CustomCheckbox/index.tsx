@@ -19,6 +19,10 @@ function index({ name, label, defaultChecked, onChange }: Props) {
     onChange(isChecked, name);
   }, [isChecked]);
 
+  useEffect(() => {
+    setIsChecked(defaultChecked);
+  }, [defaultChecked]);
+
   return (
     <div
       className={`field-type checkbox${

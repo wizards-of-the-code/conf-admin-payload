@@ -190,15 +190,17 @@ function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
         </div>
         <div className="render-fields field-type row">
           <CustomCheckbox
+            key={`is_payed-${currentData.is_payed}`}
             name="is_payed"
             label="Оплачено"
-            defaultChecked={eventData.is_payed}
+            defaultChecked={currentData.is_payed}
             onChange={(e) => handleCheckboxSwitch(e, 'is_payed')}
           />
           <CustomCheckbox
+            key={`attended-${currentData.is_payed}`}
             name="attended"
             label="Участвовал(а)"
-            defaultChecked={eventData.attended}
+            defaultChecked={currentData.attended}
             onChange={(e) => handleCheckboxSwitch(e, 'attended')}
           />
         </div>
