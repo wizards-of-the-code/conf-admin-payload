@@ -204,7 +204,7 @@ function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
             onChange={(e) => handleCheckboxSwitch(e, 'attended')}
           />
         </div>
-        <div className={`controls-row ${changed ? 'changed' : ''}`}>
+        <div className="controls-row">
           <button
             className="btn btn-compact btn--style-secondary btn--icon-style-without-border btn--size-small btn--icon-position-right"
             type="button"

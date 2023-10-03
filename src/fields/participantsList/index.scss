@@ -32,13 +32,9 @@ table td.row-controls {
 }
 
 .controls-row {
-  display: none;
+  display: flex;
   justify-content: flex-end;
   gap: 10px;
-
-  &.changed {
-    display: flex;
-  }
 }
 
 .participants-wrapper {
@@ -99,7 +95,7 @@ table td.row-controls {
   background-color: var(--theme-input-bg);
 
   &:hover {
-    background-color: var(--theme-elevation-200);
+    background-color: var(--theme-elevation-0);
   }
 }
 
