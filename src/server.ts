@@ -43,6 +43,32 @@ app.put('/api/custom/participants/:id', async (req, res) => {
   res.send(JSON.stringify('Request received'));
 });
 
+app.get('/api/custom/events/:id', async (req, res) => {
+  const event = await payload.findByID({
+    collection: 'events',
+    id: req.params.id,
+    depth: 1,
+  });
+
+  let count = 0;
+  let paid = 0;
+
+  if (event.participants.length > 0) {
+    count = event.participants.length;
+
+    event.participants.forEach((participant) => {
+      const current_event = participant.events.find(
+        (item) => item.event_id === req.params.id
+      );
+      if (current_event && current_event.is_payed) {
+        paid++;
+      }
+    });
+  }
+
+  res.send(JSON.stringify({ count, paid }));
+});
+
 const start = async () => {
   // Initialize Payload
   await payload.init({

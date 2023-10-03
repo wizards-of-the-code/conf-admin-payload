@@ -1,11 +1,11 @@
-import dateValidation from '../utils/dateValidation';
 import validateTime from '../utils/validateTime';
 import validatePrice from '../utils/validatePrice';
-import { CollectionConfig, FieldHook } from 'payload/types';
+import { CollectionConfig } from 'payload/types';
 import CurrencySelectField from '../fields/currencySelector/field';
 import CountrySelectorField from '../fields/countrySelector/field';
 import EventLinkField from '../fields/eventLink/field';
 import ParticipantsListField from '../fields/participantsList/field';
+import ParticipantsCountField from '../fields/participantsCount/field';
 
 const Events: CollectionConfig = {
   slug: 'events',
@@ -44,7 +44,7 @@ const Events: CollectionConfig = {
           admin: {
             date: {
               displayFormat: 'dd.MM.yyyy',
-            }
+            },
           },
           //validate: dateValidation,
         },
@@ -72,27 +72,20 @@ const Events: CollectionConfig = {
       label: 'Описание',
       type: 'richText',
       admin: {
-        elements: [
-          "link",
-        ],
-        leaves: [
-          "bold",
-          "italic",
-          'underline',
-          'strikethrough',
-        ],
+        elements: ['link'],
+        leaves: ['bold', 'italic', 'underline', 'strikethrough'],
       },
     },
     {
       name: 'link',
       label: 'Ссылка на сайт мероприятия',
-      type: 'text'
+      type: 'text',
     },
     {
       name: 'location',
       label: 'Место проведения',
       type: 'group',
-      interfaceName: "Location",
+      interfaceName: 'Location',
       fields: [
         {
           type: 'row',
@@ -111,7 +104,7 @@ const Events: CollectionConfig = {
           label: 'Адрес',
           type: 'text',
         },
-      ]
+      ],
     },
     {
       type: 'row',
@@ -197,15 +190,8 @@ const Events: CollectionConfig = {
           label: 'Описание',
           type: 'richText',
           admin: {
-            elements: [
-              "link",
-            ],
-            leaves: [
-              "bold",
-              "italic",
-              'underline',
-              'strikethrough',
-            ],
+            elements: ['link'],
+            leaves: ['bold', 'italic', 'underline', 'strikethrough'],
           },
           required: true,
         },
@@ -234,10 +220,11 @@ const Events: CollectionConfig = {
         allowCreate: false,
         readOnly: true,
         condition: () => false,
-      }
+      },
     },
     ParticipantsListField,
-  ]
+    ParticipantsCountField,
+  ],
 };
 
 export default Events;
