@@ -1,3 +1,5 @@
+import { Participant, ParticipantEventData, PaymentMethod } from './types';
+
 import React, { useState } from 'react';
 import TelegramSvg from '../../../assets/svgs/telegram_logo.svg';
 import ChevronUp from '../../../assets/svgs/chevron-up.svg';
@@ -6,11 +8,12 @@ import { toast } from 'react-toastify';
 import Date from 'payload/dist/admin/components/elements/DatePicker';
 import SelectInput from 'payload/dist/admin/components/elements/ReactSelect';
 import CustomCheckbox from '../../../components/CustomCheckbox';
+import { Option } from 'payload/dist/admin/components/elements/ReactSelect/types';
 
 type Props = {
-  participant: any;
-  eventData: any;
-  paymentOptions: any;
+  participant: Participant;
+  eventData: ParticipantEventData;
+  paymentOptions: Option[];
 };
 
 function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
@@ -29,7 +32,7 @@ function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
     setCurrentData(eventData);
   };
 
-  const handleCheckboxSwitch = (e: any, name: string) => {
+  const handleCheckboxSwitch = (e: boolean, name: string) => {
     setChanged(true);
     setCurrentData({
       ...currentData,
@@ -45,11 +48,14 @@ function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
     });
   };
 
-  const handlePaymentChange = (e: any) => {
+  const handlePaymentChange = (selectedOption: {
+    label: string;
+    value: string;
+  }) => {
     setChanged(true);
     setCurrentData({
       ...currentData,
-      payment_method: e.value,
+      payment_method: selectedOption.value,
     });
   };
 
@@ -61,7 +67,7 @@ function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
     });
   };
 
-  const handleRequest = (itemId, data) => {
+  const handleRequest = (itemId: string, data: unknown) => {
     const postUpdate = async () => {
       try {
         const response = await fetch(

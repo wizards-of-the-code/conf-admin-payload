@@ -48,14 +48,14 @@ function index({ name, label, defaultChecked, onChange }: Props) {
               <path
                 d="M10.6092 16.0192L17.6477 8.98076"
                 className="stroke"
-                stroke-linecap="square"
-                stroke-linejoin="bevel"
+                strokeLinecap="square"
+                strokeLinejoin="bevel"
               ></path>
               <path
                 d="M7.35229 12.7623L10.6092 16.0192"
                 className="stroke"
-                stroke-linecap="square"
-                stroke-linejoin="bevel"
+                strokeLinecap="square"
+                strokeLinejoin="bevel"
               ></path>
             </svg>
           </span>
