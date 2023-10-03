@@ -1,4 +1,4 @@
-import { Participant, ParticipantEventData, PaymentMethod } from './types';
+import { Participant, ParticipantEventData, SelectedOption } from './types';
 
 import React, { useState } from 'react';
 import TelegramSvg from '../../../assets/svgs/telegram_logo.svg';
@@ -30,6 +30,7 @@ function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
   const handleRevert = () => {
     setChanged(false);
     setCurrentData(eventData);
+    console.log(eventData);
   };
 
   const handleCheckboxSwitch = (e: boolean, name: string) => {
@@ -48,14 +49,11 @@ function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
     });
   };
 
-  const handlePaymentChange = (selectedOption: {
-    label: string;
-    value: string;
-  }) => {
+  const handlePaymentChange = (selectedOption: SelectedOption | null) => {
     setChanged(true);
     setCurrentData({
       ...currentData,
-      payment_method: selectedOption.value,
+      payment_method: selectedOption !== null ? selectedOption.value : null,
     });
   };
 
@@ -163,6 +161,7 @@ function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
           <div className="field-type select">
             <label>Способ оплаты</label>
             <SelectInput
+              key={Math.random()} // Shame, but it's the only way I have found to rerender lib's component :/
               options={paymentOptions}
               value={getSelectedOption}
               onChange={handlePaymentChange}

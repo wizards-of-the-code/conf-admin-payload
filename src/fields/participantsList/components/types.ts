@@ -26,3 +26,8 @@ export type PaymentMethod = {
   currency: string;
   source: string;
 };
+
+export type SelectedOption = {
+  label: string;
+  value: string;
+};

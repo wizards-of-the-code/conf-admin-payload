@@ -55,7 +55,7 @@ function ParticipantsList({ items, eventId }: Props) {
       eventData.payment_date = null;
     }
     if (!eventData.payment_method) {
-      eventData.payment_method = '';
+      eventData.payment_method = null;
     }
 
     return (
