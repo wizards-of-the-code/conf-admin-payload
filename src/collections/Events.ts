@@ -230,7 +230,6 @@ const Events: CollectionConfig = {
     },
     ParticipantsListField,
     ParticipantsCountField,
-    ,
     LinksField,
   ],
 };
