@@ -5,3 +5,7 @@
 #field-events .array-field__add-button-wrap {
   display: none !important;
 }
+
+.btn-compact {
+  margin: 0;
+}
