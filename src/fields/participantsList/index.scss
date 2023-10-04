@@ -59,12 +59,13 @@ table td.row-controls {
   justify-content: flex-start;
   align-items: center;
   padding: 1em;
+  gap: 2rem;
 
   .name-field {
     display: flex;
     align-items: center;
     gap: 10px;
-    width: 150px;
+    min-width: 150px;
   }
 
   .role-field {

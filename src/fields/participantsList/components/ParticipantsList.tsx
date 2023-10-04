@@ -44,6 +44,8 @@ function ParticipantsList({ items, eventId }: Props) {
       (event) => event.event_id === eventId
     );
 
+    if (!eventData) return;
+
     // Fill potentially empty fields
     if (!eventData.description) {
       eventData.description = '';
