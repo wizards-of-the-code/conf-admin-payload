@@ -7,6 +7,7 @@ import EventLinkField from '../fields/eventLink/field';
 import ParticipantsListField from '../fields/participantsList/field';
 import ParticipantsCountField from '../fields/participantsCount/field';
 import PriceCell from '../fields/price/cell';
+import LinksField from '../fields/links/field';
 
 const Events: CollectionConfig = {
   slug: 'events',
@@ -20,6 +21,7 @@ const Events: CollectionConfig = {
       'is_active',
       'datetime',
       'current_price',
+      'links',
       'schedule',
     ],
     group: 'Конференции',
@@ -115,7 +117,7 @@ const Events: CollectionConfig = {
             width: '30%',
             components: {
               Cell: PriceCell,
-            }
+            },
           },
           validate: validatePrice,
         },
@@ -127,7 +129,7 @@ const Events: CollectionConfig = {
             width: '30%',
             components: {
               Cell: PriceCell,
-            }
+            },
           },
           validate: validatePrice,
         },
@@ -228,6 +230,8 @@ const Events: CollectionConfig = {
     },
     ParticipantsListField,
     ParticipantsCountField,
+    ,
+    LinksField,
   ],
 };
 

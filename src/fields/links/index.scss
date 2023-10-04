@@ -1,0 +1,22 @@
+.links-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.link-span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--theme-elevation-100);
+  color: var(--theme-elevation-300);
+  border-radius: 3px;
+  min-width: 32px;
+  min-height: 32px;
+  padding: 6px;
+
+  &.active {
+    color: var(--theme-success-600);
+  }
+}
