@@ -6,6 +6,7 @@ import CountrySelectorField from '../fields/countrySelector/field';
 import EventLinkField from '../fields/eventLink/field';
 import ParticipantsListField from '../fields/participantsList/field';
 import ParticipantsCountField from '../fields/participantsCount/field';
+import PriceCell from '../fields/price/cell';
 
 const Events: CollectionConfig = {
   slug: 'events',
@@ -17,11 +18,9 @@ const Events: CollectionConfig = {
     defaultColumns: [
       'name',
       'is_active',
-      'current_price',
-      'partner_price',
-      'currency',
-      'schedule',
       'datetime',
+      'current_price',
+      'schedule',
     ],
     group: 'Конференции',
     useAsTitle: 'name',
@@ -46,7 +45,6 @@ const Events: CollectionConfig = {
               displayFormat: 'dd.MM.yyyy',
             },
           },
-          //validate: dateValidation,
         },
       ],
     },
@@ -115,15 +113,21 @@ const Events: CollectionConfig = {
           type: 'text',
           admin: {
             width: '30%',
+            components: {
+              Cell: PriceCell,
+            }
           },
           validate: validatePrice,
         },
         {
           name: 'partner_price',
-          label: 'Цена билета за +1',
+          label: 'Цена для партнёра',
           type: 'text',
           admin: {
             width: '30%',
+            components: {
+              Cell: PriceCell,
+            }
           },
           validate: validatePrice,
         },
