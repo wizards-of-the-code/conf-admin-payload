@@ -68,6 +68,7 @@ const generateParticipantsPDF = (data: InputData) => {
     head: [columns],
     body: unpaid_rows,
     styles: { font: 'tahoma' },
+    headStyles: { fillColor: [204, 89, 94] },
   });
 
   finalY = (pdf as any).lastAutoTable.finalY;
@@ -77,6 +78,7 @@ const generateParticipantsPDF = (data: InputData) => {
     head: [columns],
     body: paid_rows,
     styles: { font: 'tahoma' },
+    headStyles: { fillColor: [142, 204, 171] },
   });
 
   pdf.save(`Участники-${data.event.name}-${currentDate}.pdf`);
