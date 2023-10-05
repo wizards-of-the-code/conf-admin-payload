@@ -14,6 +14,7 @@ const ParticipantsListComponent: FC<{ path: string }> = ({ path }) => {
   // Functions
   const handleDownloadPDF = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+
     try {
       const response = await fetch(
         `http://${process.env.PAYLOAD_PUBLIC_CMS_URL}:${process.env.PAYLOAD_PUBLIC_NGINX_PORT}/api/custom/reports/event-participants/${id}`
@@ -22,7 +23,10 @@ const ParticipantsListComponent: FC<{ path: string }> = ({ path }) => {
 
       generateParticipantsPDF(data);
     } catch (error) {
-      console.log('Error while fetching /api/custom/unpaid: ', error);
+      console.log(
+        'Error while fetching /api/custom/reports/event-participants: ',
+        error
+      );
     }
   };
 

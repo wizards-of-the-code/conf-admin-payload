@@ -62,24 +62,28 @@ const generateParticipantsPDF = (data: InputData) => {
   pdf.text(`Данные от ${currentDate} (UTC)`, 40, finalY);
   pdf.setFontSize(12);
 
-  pdf.text(`Не оплачено (${unpaid_rows.length})`, 40, finalY + 30);
-  autoTable(pdf, {
-    startY: finalY + 40,
-    head: [columns],
-    body: unpaid_rows,
-    styles: { font: 'tahoma' },
-    headStyles: { fillColor: [204, 89, 94] },
-  });
+  if (unpaid_rows.length > 0) {
+    pdf.text(`Не оплачено (${unpaid_rows.length})`, 40, finalY + 30);
+    autoTable(pdf, {
+      startY: finalY + 40,
+      head: [columns],
+      body: unpaid_rows,
+      styles: { font: 'tahoma' },
+      headStyles: { fillColor: [204, 89, 94] },
+    });
+  }
 
-  finalY = (pdf as any).lastAutoTable.finalY;
-  pdf.text(`Оплачено (${paid_rows.length})`, 40, finalY + 30);
-  autoTable(pdf, {
-    startY: finalY + 40,
-    head: [columns],
-    body: paid_rows,
-    styles: { font: 'tahoma' },
-    headStyles: { fillColor: [142, 204, 171] },
-  });
+  if (paid_rows.length > 0) {
+    finalY = (pdf as any).lastAutoTable.finalY || finalY;
+    pdf.text(`Оплачено (${paid_rows.length})`, 40, finalY + 30);
+    autoTable(pdf, {
+      startY: finalY + 40,
+      head: [columns],
+      body: paid_rows,
+      styles: { font: 'tahoma' },
+      headStyles: { fillColor: [142, 204, 171] },
+    });
+  }
 
   pdf.save(`Участники-${data.event.name}-${currentDate}.pdf`);
 };
