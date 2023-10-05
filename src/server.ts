@@ -25,6 +25,7 @@ app.put('/api/custom/participants/:id', async (req, res) => {
       if (event.event_id === req.body.event_id) {
         event.is_payed = req.body.is_payed;
         event.attended = req.body.attended;
+        event.refund = req.body.refund;
         event.description = req.body.description;
         event.sum = req.body.sum;
         event.payment_date = req.body.payment_date;

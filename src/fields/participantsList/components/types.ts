@@ -3,6 +3,7 @@ export type ParticipantEventData = {
   role: 'participant' | 'organizer' | 'speaker' | 'volunteer';
   is_payed: boolean;
   attended: boolean;
+  refund: boolean;
   description: string;
   payment_method: string;
   payment_date: Date;

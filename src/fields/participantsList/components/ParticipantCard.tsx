@@ -120,11 +120,17 @@ function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
     }
   };
 
-  const renderPaid = currentData.is_payed ? (
-    <div className="span-green">Оплачено</div>
-  ) : (
-    <div className="span-red">Не оплачено</div>
-  );
+  const renderPaid = () => {
+    if (currentData.refund) {
+      return <div className="span-yellow">Возврат</div>;
+    } else {
+      if (currentData.is_payed) {
+        return <div className="span-green">Оплачено</div>;
+      } else {
+        return <div className="span-red">Не оплачено</div>;
+      }
+    }
+  };
 
   return (
     <div className="participant-card">
@@ -140,7 +146,7 @@ function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
           {participant.username}
         </div>
         <div className="role-field">{renderRole()}</div>
-        {renderPaid}
+        {renderPaid()}
         <div className="pc-header-controls">
           <button className="btn-action" type="button" onClick={handleCollapse}>
             {renderChevron}
@@ -194,6 +200,13 @@ function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
             label="Оплачено"
             defaultChecked={currentData.is_payed}
             onChange={(e) => handleCheckboxSwitch(e, 'is_payed')}
+          />
+          <CustomCheckbox
+            key={`refund-${currentData.refund}`}
+            name="refund"
+            label="Возврат"
+            defaultChecked={currentData.refund}
+            onChange={(e) => handleCheckboxSwitch(e, 'refund')}
           />
           <CustomCheckbox
             key={`attended-${currentData.is_payed}`}

@@ -14,11 +14,7 @@ const Participants: CollectionConfig = {
   admin: {
     group: 'Конференции',
     useAsTitle: 'username',
-    defaultColumns: [
-      'username',
-      'tg',
-      'events',
-    ],
+    defaultColumns: ['username', 'tg', 'events'],
   },
   fields: [
     ContactUserButtonField,
@@ -26,7 +22,7 @@ const Participants: CollectionConfig = {
       name: 'tg',
       label: 'Пользователь',
       type: 'group',
-      interfaceName: "Telegram",
+      interfaceName: 'Telegram',
       fields: [
         {
           name: 'tg_id',
@@ -81,6 +77,12 @@ const Participants: CollectionConfig = {
           required: true,
         },
         {
+          name: 'refund',
+          label: 'Возврат',
+          type: 'checkbox',
+          required: true,
+        },
+        {
           name: 'attended',
           label: 'Присутствовал(а) на конфе',
           type: 'checkbox',
@@ -103,7 +105,7 @@ const Participants: CollectionConfig = {
           admin: {
             date: {
               displayFormat: 'dd.MM.yyyy',
-            }
+            },
           },
         },
         {
@@ -113,26 +115,32 @@ const Participants: CollectionConfig = {
           admin: {
             components: {
               Field: PaymentMethodSelectComponent,
-            }
-          }
-        }
+            },
+          },
+        },
       ],
       admin: {
         initCollapsed: true,
         components: {
           RowLabel: ({ data, index = 0 }) => {
             const [label, setLabel] = useState('');
-      
+
             useEffect(() => {
               fetch(
                 `http://${process.env.PAYLOAD_PUBLIC_CMS_URL}:${process.env.PAYLOAD_PUBLIC_NGINX_PORT}/api/events/${data.event_id}`
               ).then(async (res) => {
                 const event = await res.json();
 
-                setLabel(`${event.name}${event.datetime ? ` - ${formatDateToDdMmYyyy(event.datetime)}` : ''}`);
-              })
+                setLabel(
+                  `${event.name}${
+                    event.datetime
+                      ? ` - ${formatDateToDdMmYyyy(event.datetime)}`
+                      : ''
+                  }`
+                );
+              });
             }, []);
-      
+
             return label;
           },
         },
@@ -151,11 +159,11 @@ const Participants: CollectionConfig = {
           ({ siblingData }) => {
             // Ensures data is not stored in DB
             delete siblingData['username'];
-          }
+          },
         ],
         afterRead: [getUsername],
       },
-    }
+    },
   ],
 };
 

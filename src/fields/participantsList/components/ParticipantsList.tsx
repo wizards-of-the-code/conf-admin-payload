@@ -59,6 +59,9 @@ function ParticipantsList({ items, eventId }: Props) {
     if (!eventData.payment_method) {
       eventData.payment_method = null;
     }
+    if (!eventData.refund) {
+      eventData.refund = false;
+    }
 
     return (
       <ParticipantCard
