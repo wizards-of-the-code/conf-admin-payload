@@ -122,12 +122,12 @@ function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
 
   const renderPaid = () => {
     if (currentData.refund) {
-      return <div className="span-yellow">Возврат</div>;
+      return <div className="span-red">Возврат</div>;
     } else {
       if (currentData.is_payed) {
         return <div className="span-green">Оплачено</div>;
       } else {
-        return <div className="span-red">Не оплачено</div>;
+        return <div className="span-yellow">Не оплачено</div>;
       }
     }
   };
