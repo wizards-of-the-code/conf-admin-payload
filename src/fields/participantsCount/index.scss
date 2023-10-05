@@ -1,8 +1,27 @@
 .participants-cell {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: var(--theme-text);
+  background-color: var(--theme-elevation-100);
+  border-radius: 4px;
+  height: 32px;
+  width: 100%;
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% / 3);
+  }
+
+  .registred-span {
+    border-right: 1px solid var(--theme-elevation-200);
+  }
 
   .paid-span {
     color: var(--theme-success-700);
+    border-right: 1px solid var(--theme-elevation-200);
   }
 
   .refund-span {

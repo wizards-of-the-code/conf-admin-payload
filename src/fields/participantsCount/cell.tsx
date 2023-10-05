@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './index.scss';
+import { Tooltip } from 'react-tooltip';
 
 const baseClass = 'participants-cell';
 
@@ -46,8 +47,28 @@ const ParticipantsCountCell: React.FC<CustomCellProps> = (props) => {
 
   return (
     <span className={baseClass}>
-      {count} / <span className="paid-span">{paid}</span> /{' '}
-      <span className="refund-span">{refund}</span>
+      <Tooltip id="tooltip-participants" />
+      <span
+        className="registred-span"
+        data-tooltip-id="tooltip-participants"
+        data-tooltip-content="Регистрации"
+      >
+        {count}
+      </span>
+      <span
+        className="paid-span"
+        data-tooltip-id="tooltip-participants"
+        data-tooltip-content="Оплаты"
+      >
+        {paid}
+      </span>
+      <span
+        className="refund-span"
+        data-tooltip-id="tooltip-participants"
+        data-tooltip-content="Возвраты"
+      >
+        {refund}
+      </span>
     </span>
   );
 };
