@@ -1,6 +1,7 @@
 import express from 'express';
 import payload from 'payload';
 import dotenv from 'dotenv';
+import formatDateToDdMmYyyy from './utils/dateFormat';
 
 dotenv.config();
 
@@ -73,6 +74,49 @@ app.get('/api/custom/events/:id', async (req, res) => {
   }
 
   res.send(JSON.stringify({ count, paid, refund }));
+});
+
+app.get('/api/custom/reports/event-participants/:id', async (req, res) => {
+  const event = await payload.findByID({
+    collection: 'events',
+    id: req.params.id,
+    depth: 1,
+  });
+
+  const result = {
+    event: {
+      id: req.params.id,
+      name: event.name,
+      date: formatDateToDdMmYyyy(event.datetime),
+    },
+    unpaid: [],
+    paid: [],
+  };
+
+  if (event.participants.length > 0) {
+    event.participants.forEach((participant) => {
+      const current_event = participant.events.find(
+        (item) => item.event_id === req.params.id
+      );
+      if (current_event) {
+        if (!current_event.refund) {
+          const row = {
+            username: participant.tg.username,
+            first_name: participant.tg.first_name || '',
+            link: `https://t.me/${participant.tg.username}`,
+          };
+
+          if (current_event.is_payed) {
+            result.paid.push(row);
+          } else {
+            result.unpaid.push(row);
+          }
+        }
+      }
+    });
+  }
+
+  res.send(JSON.stringify(result));
 });
 
 const start = async () => {
