@@ -4,6 +4,16 @@
   justify-content: space-between;
 }
 
+.field-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+
+  button {
+    margin-bottom: 1.9em;
+  }
+}
+
 .table-wrapper {
   overflow-x: auto;
 }
