@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react";
-import "./index.scss";
+import React, { useEffect, useState } from 'react';
+import './index.scss';
 
-const baseClass = "participants-cell";
+const baseClass = 'participants-cell';
 
 type CustomCellProps = {
-  field: any, 
-  colIndex: any,
-  collection: any, 
-  cellData: any,
-  rowData: any,
-}
+  field: any;
+  colIndex: any;
+  collection: any;
+  cellData: any;
+  rowData: any;
+};
 
 const ParticipantsCountCell: React.FC<CustomCellProps> = (props) => {
   const { rowData } = props;
   const [count, setCount] = useState(0);
   const [paid, setPaid] = useState(0);
+  const [refund, setRefund] = useState(0);
 
   useEffect(() => {
     const fetchParticipants = async () => {
@@ -24,14 +25,17 @@ const ParticipantsCountCell: React.FC<CustomCellProps> = (props) => {
         );
         const data = await response.json();
 
-        if(data.paid) {
+        if (data.paid) {
           setPaid(data.paid);
         }
-        
-        if(data.count) {
+
+        if (data.count) {
           setCount(data.count);
         }
 
+        if (data.refund) {
+          setRefund(data.refund);
+        }
       } catch (error) {
         console.log('error');
       }
@@ -41,9 +45,10 @@ const ParticipantsCountCell: React.FC<CustomCellProps> = (props) => {
   }, []);
 
   return (
-  <span className={baseClass}>
-    {count} / <span className="paid-span">{paid}</span>
-  </span>
+    <span className={baseClass}>
+      {count} / <span className="paid-span">{paid}</span> /{' '}
+      <span className="refund-span">{refund}</span>
+    </span>
   );
 };
 

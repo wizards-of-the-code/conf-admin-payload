@@ -53,6 +53,7 @@ app.get('/api/custom/events/:id', async (req, res) => {
 
   let count = 0;
   let paid = 0;
+  let refund = 0;
 
   if (event.participants.length > 0) {
     count = event.participants.length;
@@ -61,13 +62,17 @@ app.get('/api/custom/events/:id', async (req, res) => {
       const current_event = participant.events.find(
         (item) => item.event_id === req.params.id
       );
-      if (current_event && current_event.is_payed) {
-        paid++;
+      if (current_event) {
+        if (current_event.is_payed && !current_event.refund) {
+          paid++;
+        } else if (current_event.refund) {
+          refund++;
+        }
       }
     });
   }
 
-  res.send(JSON.stringify({ count, paid }));
+  res.send(JSON.stringify({ count, paid, refund }));
 });
 
 const start = async () => {
