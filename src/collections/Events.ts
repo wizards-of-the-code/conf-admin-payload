@@ -19,11 +19,12 @@ const Events: CollectionConfig = {
   admin: {
     defaultColumns: [
       'name',
-      'is_active',
       'datetime',
       'current_price',
+      'partner_price',
+      'participants_count',
       'links',
-      'schedule',
+      'event_link',
     ],
     group: 'Конференции',
     useAsTitle: 'name',
