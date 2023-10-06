@@ -2,6 +2,10 @@
   --font-serif: 'Roboto', sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 #field-events .array-field__add-button-wrap {
   display: none !important;
 }

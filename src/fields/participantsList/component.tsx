@@ -67,7 +67,7 @@ const ParticipantsListComponent: FC<{ path: string }> = ({ path }) => {
 
   return (
     <>
-      <div className="field-header">
+      <div className="field-header" id="participants">
         <h3>Участники</h3>
         <button
           type="button"
