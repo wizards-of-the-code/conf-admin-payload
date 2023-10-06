@@ -4,7 +4,7 @@ import EventLinkComponent from './component';
 
 const EventLinkField: Field = {
   name: 'event_link',
-  label: 'Ссылка на конфу',
+  label: ' ',
   type: 'text',
   access: {
     create: () => false,
@@ -22,9 +22,9 @@ const EventLinkField: Field = {
       ({ siblingData }) => {
         // Ensures data is not stored in DB
         delete siblingData['event_link'];
-      }
+      },
     ],
   },
-}
+};
 
 export default EventLinkField;
