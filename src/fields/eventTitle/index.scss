@@ -1,0 +1,12 @@
+.title-cell {
+  display: flex;
+  gap: 16px;
+}
+
+.status-icon {
+  color: var(--theme-elevation-300);
+
+  &.active {
+    color: var(--theme-success-600);
+  }
+}

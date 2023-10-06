@@ -8,6 +8,7 @@ import ParticipantsListField from '../fields/participantsList/field';
 import ParticipantsCountField from '../fields/participantsCount/field';
 import PriceCell from '../fields/price/cell';
 import LinksField from '../fields/links/field';
+import TitleCell from '../fields/eventTitle/cell';
 
 const Events: CollectionConfig = {
   slug: 'events',
@@ -37,6 +38,11 @@ const Events: CollectionConfig = {
           label: 'Название',
           type: 'text',
           required: true,
+          admin: {
+            components: {
+              Cell: TitleCell,
+            },
+          },
         },
         {
           name: 'datetime',
