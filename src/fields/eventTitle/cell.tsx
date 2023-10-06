@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.scss';
+import { Tooltip } from 'react-tooltip';
 
 const baseClass = 'title-cell';
 
@@ -73,9 +74,26 @@ const TitleCell: React.FC<CustomCellProps> = (props) => {
     }
   };
 
+  const tooltipContent = () => {
+    if (is_finished) return 'Завершена';
+
+    if (is_active) {
+      return 'Активна';
+    } else {
+      return 'Скрыта';
+    }
+  };
+
   return (
     <div className={baseClass}>
-      <span className={iconClass}>{renderIcon()}</span>
+      <Tooltip id="status-tooltip" />
+      <span
+        className={iconClass}
+        data-tooltip-id="status-tooltip"
+        data-tooltip-content={tooltipContent()}
+      >
+        {renderIcon()}
+      </span>
       <a href={`/admin/collections/events/${id}`}>{cellData || '--'}</a>
     </div>
   );
