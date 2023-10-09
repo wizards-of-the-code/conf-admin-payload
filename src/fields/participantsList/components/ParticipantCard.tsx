@@ -24,6 +24,7 @@ function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
   // Functions
   const handleCollapse = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     setCollapsed((prev) => !prev);
   };
 
@@ -134,8 +135,8 @@ function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
 
   return (
     <div className="participant-card">
-      <div className="pc-header">
-        <div className="name-field">
+      <div className="pc-header-wrapper">
+        <div className="pc-contact">
           <a href={`https://t.me/${participant.tg.username}`} target="_blank">
             <img
               className="svg-icon-small svg-link"
@@ -143,14 +144,20 @@ function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
               alt="Copy bot link"
             />
           </a>
-          {participant.username}
         </div>
-        <div className="role-field">{renderRole()}</div>
-        {renderPaid()}
-        <div className="pc-header-controls">
-          <button className="btn-action" type="button" onClick={handleCollapse}>
-            {renderChevron}
-          </button>
+        <div className="pc-header_handler" onClick={handleCollapse}>
+          <div className="name-field">{participant.username}</div>
+          <div className="role-field">{renderRole()}</div>
+          {renderPaid()}
+          <div className="pc-header-controls">
+            <button
+              className="btn-action"
+              type="button"
+              onClick={handleCollapse}
+            >
+              {renderChevron}
+            </button>
+          </div>
         </div>
       </div>
       <div className={`pc-body ${collapsed ? 'hidden' : ''}`}>

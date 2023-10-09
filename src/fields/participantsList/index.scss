@@ -61,15 +61,34 @@ table td.row-controls {
   background-color: var(--theme-elevation-50);
   border: 1px solid var(--theme-border-color);
   border-radius: 4px;
+
+  &:hover {
+    border-color: var(--theme-elevation-300);
+  }
 }
 
-.pc-header {
+.pc-header-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  padding: 1em;
-  gap: 2rem;
+
+  & > div {
+    padding: 1em;
+  }
+}
+
+.pc-header_handler {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--theme-elevation-100);
+  }
 
   .name-field {
     display: flex;
@@ -90,6 +109,10 @@ table td.row-controls {
   }
 }
 
+.pc-contact {
+  border-right: 1px solid var(--theme-border-color);
+}
+
 .pc-body {
   padding: 1em;
   background-color: var(--theme-bg);
@@ -106,7 +129,7 @@ table td.row-controls {
   border: 0;
   padding: 3px;
   transition: all 0.3s ease-in-out;
-  background-color: var(--theme-elevation-50);
+  background-color: transparent;
 
   &:hover {
     background-color: var(--theme-elevation-0);
