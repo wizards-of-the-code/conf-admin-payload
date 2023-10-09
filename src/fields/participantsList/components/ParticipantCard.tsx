@@ -9,6 +9,7 @@ import Date from 'payload/dist/admin/components/elements/DatePicker';
 import SelectInput from 'payload/dist/admin/components/elements/ReactSelect';
 import CustomCheckbox from '../../../components/CustomCheckbox';
 import { Option } from 'payload/dist/admin/components/elements/ReactSelect/types';
+import { Tooltip } from 'react-tooltip';
 
 type Props = {
   participant: Participant;
@@ -135,6 +136,7 @@ function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
 
   return (
     <div className="participant-card">
+      <Tooltip id="tg-contact-tooltop" />
       <div className="pc-header-wrapper">
         <div className="pc-contact">
           <a href={`https://t.me/${participant.tg.username}`} target="_blank">
@@ -142,6 +144,8 @@ function ParticipantCard({ participant, eventData, paymentOptions }: Props) {
               className="svg-icon-small svg-link"
               src={TelegramSvg}
               alt="Copy bot link"
+              data-tooltip-id="tg-contact-tooltop"
+              data-tooltip-content={`Связаться с ${participant.tg.username}`}
             />
           </a>
         </div>
