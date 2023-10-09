@@ -8,6 +8,10 @@
   height: 32px;
   width: 100%;
 
+  &.sidebar {
+    font-size: 18px;
+  }
+
   span {
     display: flex;
     align-items: center;

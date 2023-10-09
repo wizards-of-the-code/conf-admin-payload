@@ -52,7 +52,7 @@ const ParticipantsCountComponent: FC<{ path: string }> = ({ path }) => {
           </svg>
         </a>
       </div>
-      <span className="participants-cell">
+      <span className="participants-cell sidebar">
         <Tooltip id="tooltip-participants" />
         <span
           className="registred-span"
