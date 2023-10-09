@@ -128,8 +128,10 @@ table td.row-controls {
   border-radius: 50%;
   border: 0;
   padding: 3px;
+  width: 24px;
   transition: all 0.3s ease-in-out;
   background-color: transparent;
+  cursor: pointer;
 
   &:hover {
     background-color: var(--theme-elevation-0);
